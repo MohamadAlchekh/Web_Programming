@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="auth-container">
+    <div class="auth-box">
+        <h2>Hesap Oluştur</h2>
+        <form class="auth-form">
+            <div class="form-group">
+                <label for="name">Ad Soyad</label>
+                <input type="text" id="name" class="form-control" placeholder="Ad Soyad" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" class="form-control" placeholder="ornek@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password-confirm">Şifre Tekrar</label>
+                <input type="password" id="password-confirm" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="terms" required>
+                <label class="form-check-label" for="terms">
+                    <a href="/terms">Kullanım Koşulları</a>'nı kabul ediyorum
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Kayıt Ol</button>
+            
+            <div class="auth-links">
+                Zaten hesabınız var mı? <a href="/Account/Login">Giriş Yap</a>
+            </div>
+        </form>
+    </div>
+</div> 

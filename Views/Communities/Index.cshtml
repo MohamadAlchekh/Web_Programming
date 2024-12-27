@@ -1,0 +1,72 @@
+@model List<Community>
+
+@{
+    ViewData["Title"] = "Topluluklar";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Üniversite Toplulukları</h2>
+        <div class="search-box">
+            <input type="text" class="form-control" placeholder="Topluluk ara...">
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var community in Model)
+        {
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card community-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h5 class="card-title">
+                                @community.Name
+                                @if (community.IsVerified)
+                                {
+                                    <i class="bi bi-patch-check-fill text-primary ms-1" title="Onaylı Topluluk"></i>
+                                }
+                            </h5>
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-muted">@community.University</h6>
+                        <p class="card-text">@community.Description</p>
+                        <div class="community-meta">
+                            <span><i class="bi bi-people"></i> @community.MemberCount üye</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="#" class="btn btn-outline-primary btn-sm w-100">Topluluğa Katıl</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+.community-card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+}
+
+.community-meta {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.community-meta i {
+    margin-right: 5px;
+}
+
+.search-box {
+    width: 300px;
+}
+
+.bi-patch-check-fill {
+    font-size: 0.9rem;
+}
+</style> 

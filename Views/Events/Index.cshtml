@@ -1,0 +1,62 @@
+@model List<Event>
+
+@{
+    ViewData["Title"] = "Etkinlikler";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Etkinlikler</h2>
+        <div class="btn-group">
+            <button class="btn btn-outline-primary active">Tümü</button>
+            <button class="btn btn-outline-primary">Online</button>
+            <button class="btn btn-outline-primary">Yüz Yüze</button>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var evt in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <span class="badge @(evt.Type == "Online" ? "bg-info" : "bg-success") mb-2">
+                            @(evt.Type == "Online" ? "Online" : "Yüz Yüze")
+                        </span>
+                        <h5 class="card-title">@evt.Title</h5>
+                        <p class="card-text">@evt.Description</p>
+                        <div class="event-meta">
+                            <p class="mb-1">
+                                <i class="bi bi-calendar"></i> @evt.Date.ToString("dd MMMM yyyy")
+                            </p>
+                            <p class="mb-1">
+                                <i class="bi bi-geo-alt"></i> @evt.Location
+                            </p>
+                            <p class="mb-0">
+                                <i class="bi bi-people"></i> @evt.ParticipantCount+ Katılımcı
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="#" class="btn btn-primary w-100">Detayları Gör</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+.event-meta {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.event-meta i {
+    width: 20px;
+}
+
+.badge {
+    padding: 5px 10px;
+}
+</style> 
