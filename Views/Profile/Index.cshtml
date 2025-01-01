@@ -1,0 +1,232 @@
+@model User
+
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <div class="avatar-circle">
+                @Model.İsimSoyisim.Substring(0, 2).ToUpper()
+            </div>
+        </div>
+        <div class="profile-info">
+            <h1>@Model.İsimSoyisim</h1>
+            <div class="username-text">@@@Model.KullaniciAdi</div>
+            <div class="join-date">
+                <span>@Model.KayitTarihi.ToString("MMM yyyy") tarihinde katıldı</span>
+            </div>
+        </div>
+        <div class="profile-actions">
+            <button class="btn btn-secondary">Profili Düzenle</button>
+        </div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <span class="stat-number">@Model.KatildigiEtkinlikler</span>
+            <span class="stat-label">AKTİVİTELER</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-number">@Model.TakipEttigiTopluluklar</span>
+            <span class="stat-label">TAKİP EDİLEN</span>
+        </div>
+    </div>
+
+    <div class="tabs-section">
+        <div class="tab">
+            <button class="tablinks active">Aktiviteler</button>
+            <button class="tablinks">Konuşmalar</button>
+            <button class="tablinks">Topluluklar</button>
+            <button class="tablinks">Biletler</button>
+        </div>
+    </div>
+
+    <div class="activities-section">
+        @foreach (var activity in Model.KatildigiEtkinlikler)
+        {
+            <div class="activity-card">
+                <div class="activity-title">
+                    <i class="fas fa-ticket-alt"></i>
+                    @activity
+                </div>
+                <div class="activity-details">
+                    buna bir bilet aldı
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .profile-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatar-circle {
+        width: 80px;
+        height: 80px;
+        background-color: #4c6fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .profile-info {
+        flex-grow: 1;
+    }
+
+    .profile-info h1 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .username-text {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .join-date {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .stats-container {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .stat-number {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #666;
+        margin-top: 4px;
+    }
+
+    .tabs-section {
+        background-color: white;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab {
+        display: flex;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tablinks {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        background: none;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .tablinks.active {
+        color: #4c6fff;
+        border-bottom: 2px solid #4c6fff;
+    }
+
+    .activities-section {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .activity-card {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .activity-card:last-child {
+        border-bottom: none;
+    }
+
+    .activity-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .activity-title i {
+        color: #4c6fff;
+        margin-right: 10px;
+    }
+
+    .activity-details {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .btn-secondary {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        color: #333;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e9ecef;
+    }
+/*
+    media (max-width: 768px) {
+        .profile-header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }*/
+
+        .profile-actions {
+            margin-top: 15px;
+        }
+
+        .stats-container {
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1 1 33%;
+            margin: 5px 0;
+        }
+    }
+</style>
