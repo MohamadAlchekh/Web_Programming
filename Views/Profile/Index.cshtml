@@ -1,17 +1,17 @@
-@model UserProfile
+@model User
 
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-avatar">
             <div class="avatar-circle">
-                @Model.Name.Substring(0, 2).ToUpper()
+                @Model.İsimSoyisim.Substring(0, 2).ToUpper()
             </div>
         </div>
         <div class="profile-info">
-            <h1>@Model.Name</h1>
-            <div class="username-text">@@@Model.Username</div>
+            <h1>@Model.İsimSoyisim</h1>
+            <div class="username-text">@@@Model.KullaniciAdi</div>
             <div class="join-date">
-                <span>@Model.JoinDate.ToString("MMM yyyy") tarihinde katıldı</span>
+                <span>@Model.KayitTarihi.ToString("MMM yyyy") tarihinde katıldı</span>
             </div>
         </div>
         <div class="profile-actions">
@@ -21,16 +21,12 @@
 
     <div class="stats-container">
         <div class="stat-box">
-            <span class="stat-number">@Model.ActivityCount</span>
+            <span class="stat-number">@Model.KatildigiEtkinlikler</span>
             <span class="stat-label">AKTİVİTELER</span>
         </div>
         <div class="stat-box">
-            <span class="stat-number">@Model.FollowingCount</span>
+            <span class="stat-number">@Model.TakipEttigiTopluluklar</span>
             <span class="stat-label">TAKİP EDİLEN</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">@Model.FollowersCount</span>
-            <span class="stat-label">TAKİPÇİ</span>
         </div>
     </div>
 
@@ -44,12 +40,12 @@
     </div>
 
     <div class="activities-section">
-        @foreach (var activity in Model.Activities)
+        @foreach (var activity in Model.KatildigiEtkinlikler)
         {
             <div class="activity-card">
                 <div class="activity-title">
                     <i class="fas fa-ticket-alt"></i>
-                    @activity.Name
+                    @activity
                 </div>
                 <div class="activity-details">
                     buna bir bilet aldı
