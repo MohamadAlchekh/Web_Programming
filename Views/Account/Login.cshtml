@@ -1,7 +1,13 @@
 @{
     ViewData["Title"] = "Giriş Yap";
-}
 
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <div class="auth-container">
     <div class="auth-box">
         <h2>Giriş Yap</h2>
@@ -43,7 +49,12 @@
                     Beni Hatırla
                 </label>
             </div>
-            
+            @if (ViewBag.Error != null)
+            {
+                <div class="text-danger mt-3">
+                    @ViewBag.Error
+                </div>
+            }
             <button type="submit" class="btn btn-primary w-100">
                 Giriş Yap
             </button>

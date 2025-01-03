@@ -149,22 +149,11 @@ namespace FinalProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KatildigiEtkinlikler")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("KullaniciAdi")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("SifreHash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TakipEttigiTopluluklar")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("İsimSoyisim")

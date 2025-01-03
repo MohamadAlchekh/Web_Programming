@@ -1,29 +1,28 @@
 @{
     ViewData["Title"] = "Kayıt Ol";
 }
-
 <div class="auth-container">
     <div class="auth-box">
         <h2>Hesap Oluştur</h2>
-        <form class="auth-form">
+        <form method="post" asp-controller="Account" asp-action="Register" class="auth-form">
             <div class="form-group">
-                <label for="name">Ad Soyad</label>
-                <input type="text" id="name" class="form-control" placeholder="Ad Soyad" required>
+                <label for="İsimSoyisim">Ad Soyad</label>
+                <input type="text" name="İsimSoyisim" id="İsimSoyisim" class="form-control" placeholder="Ad Soyad" required>
             </div>
             
             <div class="form-group">
-                <label for="email">E-posta</label>
-                <input type="email" id="email" class="form-control" placeholder="ornek@email.com" required>
+                <label for="Email">E-posta</label>
+                <input type="email" name="Email" id="Email" class="form-control" placeholder="ornek@email.com" required>
             </div>
             
             <div class="form-group">
-                <label for="password">Şifre</label>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                <label for="SifreHash">Şifre</label>
+                <input type="password" name="SifreHash" id="SifreHash" class="form-control" placeholder="••••••••" required>
             </div>
             
             <div class="form-group">
                 <label for="password-confirm">Şifre Tekrar</label>
-                <input type="password" id="password-confirm" class="form-control" placeholder="••••••••" required>
+                <input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="••••••••" required>
             </div>
             
             <div class="form-check mb-3">
@@ -40,4 +39,15 @@
             </div>
         </form>
     </div>
+<script> // Şifre Eeşleşmesi Doğru Olup Olmadığını Kontrolu
+    document.querySelector("form").addEventListener("submit", function (e) {
+        const password = document.getElementById("SifreHash").value;
+        const confirmPassword = document.getElementById("password-confirm").value;
+
+        if (password !== confirmPassword) {
+            e.preventDefault(); 
+            alert("Şifreler Eşleşmiyor!");
+        }
+    });
+</script>
 </div> 
