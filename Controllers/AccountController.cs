@@ -58,12 +58,10 @@ namespace FinalProject.Controllers
         public IActionResult Register(User user)
         {
             
-            if (true) //ModelState.IsValid
+            if (ModelState.IsValid) 
             {
-                // Create an instance of PasswordHasher
                 var SifreHash = new PasswordHasher<User>();
 
-                // Hash the password
                 user.SifreHash = SifreHash.HashPassword(user, user.SifreHash);
 
                 _context.Users.Add(user);
