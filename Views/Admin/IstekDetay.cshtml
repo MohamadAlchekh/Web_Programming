@@ -1,0 +1,78 @@
+@model FinalProject.Models.ToplulukOlusturmaIstegi
+
+@{
+    ViewData["Title"] = "Topluluk İsteği Detayı";
+}
+
+<div class="container mt-4">
+    <h2>Topluluk İsteği Detayı</h2>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title">Topluluk Bilgileri</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Topluluk Adı</dt>
+                        <dd class="col-sm-8">@Model.ToplulukAdi</dd>
+
+                        <dt class="col-sm-4">Başkan</dt>
+                        <dd class="col-sm-8">@Model.BaskanAdSoyad</dd>
+
+                        <dt class="col-sm-4">Başvuru Tarihi</dt>
+                        <dd class="col-sm-8">@Model.BasvuruTarihi.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-4">Durum</dt>
+                        <dd class="col-sm-8">
+                            @switch (Model.Durum)
+                            {
+                                case ToplulukBasvuruDurumu.Beklemede:
+                                    <span class="badge bg-warning">Beklemede</span>
+                                    break;
+                                case ToplulukBasvuruDurumu.Onaylandi:
+                                    <span class="badge bg-success">Onaylandı</span>
+                                    break;
+                                case ToplulukBasvuruDurumu.Reddedildi:
+                                    <span class="badge bg-danger">Reddedildi</span>
+                                    break;
+                            }
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title">Ek Bilgiler</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Açıklama</dt>
+                        <dd class="col-sm-8">@(string.IsNullOrEmpty(Model.Aciklama) ? "Belirtilmemiş" : Model.Aciklama)</dd>
+
+                        <dt class="col-sm-4">Başkanlık Belgesi</dt>
+                        <dd class="col-sm-8">
+                            @if (!string.IsNullOrEmpty(Model.KanitBelgesiYolu))
+                            {
+                                <a href="@Model.KanitBelgesiYolu" target="_blank" class="btn btn-primary btn-sm">
+                                    Belgeyi Görüntüle
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Belge yüklenmemiş</span>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a asp-action="TumIstekler" class="btn btn-secondary">Geri Dön</a>
+                @if (Model.Durum == ToplulukBasvuruDurumu.Beklemede)
+                {
+                    <div>
+                        <a asp-action="IstekOnayla" asp-route-id="@Model.ID" class="btn btn-success">Onayla</a>
+                        <a asp-action="IstekReddet" asp-route-id="@Model.ID" class="btn btn-danger">Reddet</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div> 

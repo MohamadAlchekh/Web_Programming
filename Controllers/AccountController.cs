@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using FinalProject.Models;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -25,21 +24,28 @@ namespace FinalProject.Controllers
         [HttpPost]
         public IActionResult Login(string Email, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.SifreHash == password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
 
             if (user != null)
             {
-                var claims = new List<Claim>
+                var passwordHasher = new PasswordHasher<User>();
+                var result = passwordHasher.VerifyHashedPassword(user, user.SifreHash, password);
+                
+                if (result == PasswordVerificationResult.Success)
                 {
-                    new Claim(ClaimTypes.Name,user.Email),
-                    //new Claim(ClaimTypes.Role,user.Email),
-                };
-                var identity = new ClaimsIdentity(claims, "CookieAuth");
-                var principal = new ClaimsPrincipal(identity);
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.Role, user.Role),
+                    };
+                    var identity = new ClaimsIdentity(claims, "CookieAuth");
+                    var principal = new ClaimsPrincipal(identity);
 
-                HttpContext.SignInAsync("CookieAuth", principal) ;
-                return RedirectToAction("Index","Home");
+                    HttpContext.SignInAsync("CookieAuth", principal);
+                    return RedirectToAction("Index", "Home");
+                }
             }
+            
             ViewBag.Error = "Kullanıcı adı veya parola hatalı.";
             return View();
         }

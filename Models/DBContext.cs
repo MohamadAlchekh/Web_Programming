@@ -11,6 +11,7 @@ namespace FinalProject.Models
         public DbSet<Topluluk> Topluluklar { get; set; }
         public DbSet<Etkinlik> Etkinlikler { get; set; }
         public DbSet<Katilim> Katilimlar { get; set; }
+        public DbSet<ToplulukOlusturmaIstegi> ToplulukOlusturmaIstekleri { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
