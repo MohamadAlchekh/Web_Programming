@@ -4,6 +4,7 @@ using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20250106195835_NewMigration")]
+    partial class NewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,42 +140,6 @@ namespace FinalProject.Migrations
                     b.ToTable("Topluluklar");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.ToplulukOlusturmaIstegi", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Aciklama")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("BaskanAdSoyad")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("BasvuruTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Durum")
-                        .HasColumnType("int");
-
-                    b.Property<string>("KanitBelgesiYolu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToplulukAdi")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ToplulukOlusturmaIstekleri");
-                });
-
             modelBuilder.Entity("FinalProject.Models.User", b =>
                 {
                     b.Property<int>("ID")
@@ -187,10 +154,6 @@ namespace FinalProject.Migrations
 
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SifreHash")
                         .IsRequired()

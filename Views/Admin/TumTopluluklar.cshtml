@@ -1,0 +1,36 @@
+@model IEnumerable<FinalProject.Models.Topluluk>
+
+@{
+    ViewData["Title"] = "Tüm Topluluklar";
+}
+
+<div class="container mt-4">
+    <h2>Tüm Topluluklar</h2>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Topluluk Adı</th>
+                    <th>Başkan</th>
+                    <th>Üye Sayısı</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var topluluk in Model)
+                {
+                    <tr>
+                        <td>@topluluk.Isim</td>
+                        <td>@topluluk.Olusturan</td>
+                        <td>@topluluk.UyeSayisi</td>
+                        <td>
+                            <span class="badge bg-success">Aktif</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

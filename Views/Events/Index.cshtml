@@ -1,4 +1,4 @@
-@model List<Etkinlik>
+@model List<FinalProject.Models.Etkinlik>
 
 @{
     ViewData["Title"] = "Etkinlikler";
@@ -7,40 +7,64 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Etkinlikler</h2>
-        <div class="btn-group">
-            <button class="btn btn-outline-primary active">Tümü</button>
-            <button class="btn btn-outline-primary">Online</button>
-            <button class="btn btn-outline-primary">Yüz Yüze</button>
+        <div class="d-flex gap-3">
+            <div class="btn-group">
+                <button class="btn btn-outline-primary active" onclick="filterEvents('all')">Tümü</button>
+                <button class="btn btn-outline-primary" onclick="filterEvents('online')">Online</button>
+                <button class="btn btn-outline-primary" onclick="filterEvents('physical')">Yüz Yüze</button>
+            </div>
+            <a href="@Url.Action("Create", "Events")" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Yeni Etkinlik
+            </a>
         </div>
     </div>
 
-    <div class="row">
-        @foreach (var evt in Model)
+    <div class="row" id="eventsContainer">
+        @if (Model != null && Model.Any())
         {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <span class="badge @(evt.Online == true ? "bg-info" : "bg-success") mb-2">
-                            @(evt.Online == false ? "Online" : "Yüz Yüze")
-                        </span>
-                        <h5 class="card-title">@evt.Baslik</h5>
-                        <p class="card-text">@evt.Aciklama</p>
-                        <div class="event-meta">
-                            <p class="mb-1">
-                                <i class="bi bi-calendar"></i> @evt.Tarih.ToString("dd MMMM yyyy")
+            foreach (var etkinlik in Model)
+            {
+                <div class="col-md-4 mb-4 event-item @(etkinlik.Online ? "online" : "physical")">
+                    <div class="card h-100 shadow-sm">
+                        @if (!string.IsNullOrEmpty(etkinlik.ResimUrl))
+                        {
+                            <img src="@etkinlik.ResimUrl" class="card-img-top" alt="@etkinlik.Baslik">
+                        }
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="badge @(etkinlik.Online ? "bg-info" : "bg-success")">
+                                    @(etkinlik.Online ? "Online" : "Yüz Yüze")
+                                </span>
+                                <small class="text-muted">@etkinlik.KatilimSayisi katılımcı</small>
+                            </div>
+                            <h5 class="card-title">@etkinlik.Baslik</h5>
+                            <p class="card-text text-muted">
+                                @(etkinlik.Aciklama.Length > 150 ? etkinlik.Aciklama.Substring(0, 147) + "..." : etkinlik.Aciklama)
                             </p>
-                            <p class="mb-1">
-                                <i class="bi bi-geo-alt"></i> @evt.Lokasyon
-                            </p>
-                            <p class="mb-0">
-                                <i class="bi bi-people"></i> @evt.KatilimSayisi+ Katılımcı
-                            </p>
+                            <div class="event-meta">
+                                <p class="mb-1">
+                                    <i class="bi bi-calendar"></i> @etkinlik.Tarih.ToString("dd MMMM yyyy HH:mm")
+                                </p>
+                                <p class="mb-0">
+                                    <i class="bi bi-geo-alt"></i> @etkinlik.Lokasyon
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a href="@Url.Action("Details", "Events", new { id = etkinlik.ID })" class="btn btn-outline-primary w-100">
+                                Detayları Gör
+                            </a>
                         </div>
                     </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="#" class="btn btn-primary w-100">Detayları Gör</a>
-                    </div>
                 </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-calendar-x display-1 text-muted mb-3"></i>
+                <h4>Henüz hiç etkinlik yok</h4>
+                <p class="text-muted">İlk etkinliği oluşturmak için "Yeni Etkinlik" butonuna tıklayın.</p>
             </div>
         }
     </div>
@@ -56,7 +80,42 @@
     width: 20px;
 }
 
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
 .badge {
     padding: 5px 10px;
 }
-</style> 
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+</style>
+
+@section Scripts {
+    <script>
+        function filterEvents(type) {
+            const container = document.getElementById('eventsContainer');
+            const events = container.getElementsByClassName('event-item');
+            
+            Array.from(events).forEach(event => {
+                if (type === 'all') {
+                    event.style.display = 'block';
+                } else {
+                    event.style.display = event.classList.contains(type) ? 'block' : 'none';
+                }
+            });
+
+            // Update active button state
+            const buttons = document.querySelectorAll('.btn-group .btn');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+} 

@@ -19,5 +19,7 @@ namespace FinalProject.Models
         [Required]
         public DateTime KayitTarihi { get; set; } = DateTime.Now;
         
+        [Required]
+        public string Role { get; set; } = "User";
     }
 } 
