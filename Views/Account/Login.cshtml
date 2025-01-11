@@ -1,7 +1,29 @@
 @{
     ViewData["Title"] = "Giriş Yap";
-
 }
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea25 50%,#9e7cd628 100%) !important;
+    }
+    .auth-container {
+        min-height: calc(100vh - 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea25 50%,#9e7cd628 100%) !important;
+    }
+    .btn-primary {
+        padding: 0.8rem 1.5rem;
+    }
+    .forgot-password {
+        color: var(--primary-color) !important;
+        text-decoration: none;
+    }
+    .forgot-password:hover {
+        color: var(--hover-purple) !important;
+    }
+</style>
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -14,14 +36,14 @@
         
         @if (!string.IsNullOrEmpty(TempData["Error"]?.ToString()))
         {
-            <div class="alert alert-danger mb-3">
+            <div class="alert alert-danger mb-4">
                 @TempData["Error"]
             </div>
         }
 
         <form class="auth-form" asp-action="Login" asp-controller="Account" method="post">
-            <div class="form-group">
-                <label for="email">E-posta</label>
+            <div class="form-group mb-4">
+                <label for="email" class="mb-2">E-posta</label>
                 <input type="email" 
                        id="email" 
                        name="email" 
@@ -30,8 +52,8 @@
                        required>
             </div>
             
-            <div class="form-group">
-                <label for="password">Şifre</label>
+            <div class="form-group mb-4">
+                <label for="password" class="mb-2">Şifre</label>
                 <input type="password" 
                        id="password" 
                        name="password" 
@@ -40,28 +62,22 @@
                        required>
             </div>
             
-            <div class="form-check mb-3">
-                <input type="checkbox" 
-                       class="form-check-input" 
-                       id="rememberMe" 
-                       name="rememberMe">
-                <label class="form-check-label" for="rememberMe">
-                    Beni Hatırla
-                </label>
-            </div>
-            @if (ViewBag.Error != null)
-            {
-                <div class="text-danger mt-3">
-                    @ViewBag.Error
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                    <input type="checkbox" 
+                           class="form-check-input" 
+                           id="rememberMe" 
+                           name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">
+                        Beni Hatırla
+                    </label>
                 </div>
-            }
-            <button type="submit" class="btn btn-primary w-100">
-                Giriş Yap
-            </button>
+                <a href="/Account/ForgotPassword" class="forgot-password">Şifremi Unuttum</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
             
-            <div class="auth-links">
-                <a href="/Account/ForgotPassword">Şifremi Unuttum</a>
-                <span class="separator">|</span>
+            <div class="auth-links mt-4">
                 Hesabınız yok mu? <a href="/Account/Register">Kayıt Ol</a>
             </div>
         </form>

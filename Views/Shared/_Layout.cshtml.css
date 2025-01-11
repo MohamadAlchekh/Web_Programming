@@ -1,4 +1,4 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -41,17 +41,6 @@ a {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
-
-.footer {
-  padding: 1.5rem 0;
-  background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.8) 0%, 
-      rgba(245, 245, 245, 0.9) 50%, 
-      rgba(240, 240, 240, 1) 100%); /* Daha beyaz tonlar */
-  border-top: 1px solid rgba(200, 200, 200, 0.4); /* Daha açık bir gri sınır */
-  backdrop-filter: blur(5px);
-  color: #4A5568;
 }
 
 .card {
@@ -203,4 +192,3 @@ button.accept-policy {
     color: #3b7dd1;
     border-bottom: 2px solid #3b7dd1;
 }
-
