@@ -17,67 +17,67 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FinalProject
 build_property.RootNamespace = FinalProject
-build_property.ProjectDir = C:\Users\cevik\OneDrive\Masaüstü\web-odev\Web_Programming\
+build_property.ProjectDir = C:\Web_Programming\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\cevik\OneDrive\Masaüstü\web-odev\Web_Programming
+build_property.MSBuildProjectDirectory = C:\Web_Programming
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Account/Login.cshtml]
+[C:/Web_Programming/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Account/Register.cshtml]
+[C:/Web_Programming/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Communities/Index.cshtml]
+[C:/Web_Programming/Views/Communities/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbXVuaXRpZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Events/Index.cshtml]
+[C:/Web_Programming/Views/Events/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Home/Index.cshtml]
+[C:/Web_Programming/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Home/Privacy.cshtml]
+[C:/Web_Programming/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Profile/Index.cshtml]
+[C:/Web_Programming/Views/Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Shared/Error.cshtml]
+[C:/Web_Programming/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Web_Programming/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Topluluk/Liste.cshtml]
+[C:/Web_Programming/Views/Topluluk/Liste.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9wbHVsdWtcTGlzdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Topluluk/Olustur.cshtml]
+[C:/Web_Programming/Views/Topluluk/Olustur.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVG9wbHVsdWtcT2x1c3R1ci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/_ViewImports.cshtml]
+[C:/Web_Programming/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/_ViewStart.cshtml]
+[C:/Web_Programming/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cevik/OneDrive/Masaüstü/web-odev/Web_Programming/Views/Shared/_Layout.cshtml]
+[C:/Web_Programming/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-1iqdgs6srz

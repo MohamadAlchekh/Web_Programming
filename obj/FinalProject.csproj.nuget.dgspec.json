@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cevik\\OneDrive\\Masaüstü\\web-odev\\Web_Programming\\FinalProject.csproj": {}
+    "C:\\Web_Programming\\FinalProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cevik\\OneDrive\\Masaüstü\\web-odev\\Web_Programming\\FinalProject.csproj": {
+    "C:\\Web_Programming\\FinalProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cevik\\OneDrive\\Masaüstü\\web-odev\\Web_Programming\\FinalProject.csproj",
+        "projectUniqueName": "C:\\Web_Programming\\FinalProject.csproj",
         "projectName": "FinalProject",
-        "projectPath": "C:\\Users\\cevik\\OneDrive\\Masaüstü\\web-odev\\Web_Programming\\FinalProject.csproj",
-        "packagesPath": "C:\\Users\\cevik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cevik\\OneDrive\\Masaüstü\\web-odev\\Web_Programming\\obj\\",
+        "projectPath": "C:\\Web_Programming\\FinalProject.csproj",
+        "packagesPath": "C:\\Users\\malch\\.nuget\\packages\\",
+        "outputPath": "C:\\Web_Programming\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\cevik\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\malch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,9 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.devexpress.com/QddIMtBvbe8pfsMgkHbpvJGxO8p2KYPcUWjpYZfSbyN44HguCQ/api": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -91,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
