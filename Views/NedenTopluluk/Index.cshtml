@@ -1,0 +1,239 @@
+@{
+    ViewData["Title"] = "Neden Kampüs Yanımda?";
+}
+
+<div class="why-community-hero">
+    <div class="hero-content">
+        <h1>Neden Kampüs Yanımda?</h1>
+        <p>Kampüs Yanımda platformumuz, Uludağ Üniversitesindeki öğrencilerin ve profesyonellerin bir araya gelerek paylaşım yapabilecekleri benzersiz bir ortam sunar.</p>
+    </div>
+</div>
+
+<style>
+body {
+    background: white;
+}
+
+.why-community-hero {
+    background: white;
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+    background: linear-gradient(135deg, var(--primary-color), var(--hover-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px;
+    justify-content: center;
+}
+
+.col-md-4 {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+    margin: 15px;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
+}
+
+.about-container {
+    padding: 80px 0;
+    background: white;
+    position: relative;
+}
+
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.05), transparent);
+}
+
+.platform-info {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.team-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.mission-box {
+    background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.03), rgba(var(--hover-purple-rgb), 0.03));
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.lead-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+@@media screen and (max-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .about-container {
+        padding: 40px 20px;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .lead-text {
+        font-size: 1rem;
+    }
+}
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                    <h3>Bağlantı Kur</h3>
+                    <p>Ortak ilgi alanlarına sahip insanlarla tanış, fikir alışverişinde bulun ve network'ünü genişlet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-lightbulb-fill display-4 text-warning mb-3"></i>
+                    <h3>Öğren ve Geliş</h3>
+                    <p>Etkinlikler, workshoplar ve paylaşımlar sayesinde sürekli kendini geliştirme fırsatı yakala.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-megaphone-fill display-4 text-success mb-3"></i>
+                    <h3>Paylaş ve Büyü</h3>
+                    <p>Kendi topluluğunu oluştur, etkinlikler düzenle ve başkalarına ilham kaynağı ol.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Hemen Başla</h2>
+            <p class="mb-4">Topluluklara katıl, etkinliklere kayıt ol veya kendi topluluğunu oluştur!</p>
+            <a href="/Account/Register" class="btn btn-primary btn-lg">Üye Ol</a>
+        </div>
+    </div>
+</div>
+
+<div class="about-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="platform-info">
+                    <h2 class="section-title">Platformumuz Hakkında</h2>
+                    <p class="lead-text">
+                        Kampüs Yanımda, Uludağ Üniversitesi öğrencilerinin sosyal ve akademik gelişimini desteklemek amacıyla 2024 yılında kurulmuştur. 
+                        Platformumuz, öğrencilerin ilgi alanlarına göre topluluklar oluşturabildiği, etkinlikler düzenleyebildiği ve diğer öğrencilerle 
+                        etkileşime geçebildiği dinamik bir ortam sunmaktadır.
+                    </p>
+                </div>
+
+                <div class="team-section">
+                    <h3 class="section-subtitle">Kurucu Ekibimiz</h3>
+                    <p class="lead-text">
+                        Platform, Uludağ Üniversitesi Yönetim Bilişim Sistemleri bölümü öğrencileri Merve Subaşı, Samet Çevik ve Mohamad Alchekh tarafından, 
+                        öğrencilerin kampüs hayatını daha interaktif ve verimli hale getirmek amacıyla geliştirilmiştir.
+                    </p>
+
+                    <div class="mission-box">
+                        <h4 class="section-subtitle">Misyonumuz</h4>
+                        <p class="lead-text mb-0">
+                            Öğrencilerin sosyal ve akademik gelişimlerini destekleyerek, üniversite hayatlarını 
+                            daha anlamlı ve verimli kılmak için gerekli platformu sağlamaktır.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

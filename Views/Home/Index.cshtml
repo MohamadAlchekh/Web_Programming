@@ -1,0 +1,239 @@
+@model List<FinalProject.Models.Etkinlik>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="home-container">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Kampüs Yanımda'ya Hoş Geldiniz!</h1>
+            <p>Uludağ Üniversitesi öğrencileri için topluluk ve etkinlik platformu</p>
+            <div class="hero-buttons">
+                <a href="/Account/Register" class="btn btn-primary">Hemen Başla</a>
+                <a href="/NedenTopluluk" class="btn btn-outline">Daha Fazla Bilgi</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Yaklaşan Etkinlikler</h2>
+                <a asp-controller="Events" asp-action="Index" class="btn btn-outline-primary">Tüm Etkinlikleri Göster</a>
+            </div>
+            
+            <div class="event-grid">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var etkinlik in Model)
+                    {
+                        <div class="event-card">
+                            @if (!string.IsNullOrEmpty(etkinlik.ResimUrl))
+                            {
+                                <img src="@etkinlik.ResimUrl" class="card-img-top" alt="@etkinlik.Baslik">
+                            }
+                            <div class="event-details">
+                                <span class="event-tag @(etkinlik.Online ? "online" : "physical")">
+                                    @(etkinlik.Online ? "Online" : "Yüz Yüze")
+                                </span>
+                                <h3>@etkinlik.Baslik</h3>
+                                <p>@etkinlik.Aciklama</p>
+                                <div class="event-meta">
+                                    <p>
+                                        <i class="bi bi-people"></i> @etkinlik.KatilimSayisi katılımcı
+                                    </p>
+                                    <p>
+                                        <i class="bi bi-calendar"></i> @etkinlik.Tarih.ToString("dd MMMM yyyy HH:mm")
+                                    </p>
+                                    <p>
+                                        <i class="bi bi-geo-alt"></i> @etkinlik.Lokasyon
+                                    </p>
+                                    @if (ViewData["Topluluk_" + etkinlik.Topluluk] != null)
+                                    {
+                                        <p>
+                                            <i class="bi bi-people-fill"></i> @ViewData["Topluluk_" + etkinlik.Topluluk]
+                                        </p>
+                                    }
+                                </div>
+                                <a href="@Url.Action("Details", "Events", new { id = etkinlik.ID })" class="btn btn-primary mt-3">
+                                    Detayları Gör
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-events">
+                        <i class="bi bi-calendar-x display-1 text-muted"></i>
+                        <h4>Henüz yaklaşan etkinlik bulunmuyor</h4>
+                        <p>Yeni etkinlikler eklendiğinde burada görüntülenecektir.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <style>
+    .hero-section {
+        background: linear-gradient(135deg, #4a1c95 0%, #6d28d9 100%);
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        width: 100vw;
+        position: relative;
+        left: calc(-50vw + 50%);
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .hero-buttons .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+    }
+
+    .btn-primary {
+        background-color: #4f46e5;
+        border-color: #4f46e5;
+        color: white;
+    }
+
+    .btn-outline {
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        color: white;
+        background: transparent;
+    }
+
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .event-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .event-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        overflow: hidden;
+    }
+
+    .event-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .event-details {
+        padding: 20px;
+    }
+
+    .event-tag {
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .event-tag.online {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .event-tag.physical {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .event-details h3 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .event-meta {
+        color: #666666;
+        font-size: 0.9rem;
+    }
+
+    .event-meta p {
+        margin-bottom: 5px;
+    }
+
+    .event-meta i {
+        width: 20px;
+        margin-right: 5px;
+    }
+
+    .no-events {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 50px 0;
+        color: #666;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-text h1 {
+            font-size: 2rem;
+        }
+        
+        .event-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .section-header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+    }
+    </style>
+</div>

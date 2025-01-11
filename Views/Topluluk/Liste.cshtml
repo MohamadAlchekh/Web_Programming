@@ -1,0 +1,106 @@
+@model List<FinalProject.Models.Topluluk>
+
+@{
+    ViewData["Title"] = "Topluluklar";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Üniversite Toplulukları</h2>
+        <div class="search-box">
+            <input type="text" class="form-control" placeholder="Topluluk ara..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="row" id="topluluklarContainer">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var topluluk in Model)
+            {
+                <div class="col-md-4 col-lg-3 mb-4 topluluk-card">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="card-title">
+                                    @topluluk.Isim
+                                    @if (topluluk.Onayli)
+                                    {
+                                        <i class="bi bi-patch-check-fill text-primary ms-1" title="Onaylı Topluluk"></i>
+                                    }
+                                </h5>
+                            </div>
+                            <h6 class="card-subtitle mb-2 text-muted">@topluluk.Universite</h6>
+                            <p class="card-text">@topluluk.Aciklama</p>
+                            <div class="community-meta">
+                                <span><i class="bi bi-people"></i> @topluluk.UyeSayisi üye</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-outline-primary btn-sm w-100">Topluluğa Katıl</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-people-fill display-1 text-muted mb-3"></i>
+                <h4>Henüz hiç topluluk yok</h4>
+                <p class="text-muted">İlk topluluğu oluşturmak için "Topluluk Oluştur" butonuna tıklayın.</p>
+                <a asp-controller="Topluluk" asp-action="Olustur" class="btn btn-primary mt-3">
+                    Topluluk Oluştur
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+.card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.community-meta {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.community-meta i {
+    margin-right: 5px;
+}
+
+.search-box {
+    width: 300px;
+}
+
+.bi-patch-check-fill {
+    font-size: 0.9rem;
+}
+</style>
+
+@section Scripts {
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchText = this.value.toLowerCase();
+            const cards = document.getElementsByClassName('topluluk-card');
+            
+            Array.from(cards).forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const description = card.querySelector('.card-text').textContent.toLowerCase();
+                
+                if (title.includes(searchText) || description.includes(searchText)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+} 
