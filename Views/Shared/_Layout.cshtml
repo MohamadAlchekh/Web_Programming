@@ -29,6 +29,17 @@
             position: relative;
             z-index: 1000;
         }
+
+        /* #logoutForm button {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 0.25rem 1rem;
+        }
+        #logoutForm button:hover {
+            background-color: #f8f9fa;
+        } */
     </style>
 </head>
 <body>
@@ -48,13 +59,18 @@
                         <i class="bi bi-person-circle"></i> Profilim
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/Account/Profile">Profil</a></li>
+                        <li><a class="dropdown-item" href="/Profile/">Profil</a></li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li><a class="dropdown-item" href="/Admin/Index">Admin Paneli</a></li>
                         }
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/Account/Logout">Çıkış Yap</a></li>
+                        @* <li><a class="dropdown-item" href="/Account/Logout">Çıkış Yap</a></li> *@
+                        <li>
+                            <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="dropdown-item p-0">
+                                <button type="submit" class="dropdown-item">Çıkış Yap</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             }

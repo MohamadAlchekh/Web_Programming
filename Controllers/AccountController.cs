@@ -21,6 +21,15 @@ namespace FinalProject.Controllers
         {
             _context = context;
         }
+
+        [HttpPost]  // Changed to POST for security
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("CookieAuth");  // Use the same scheme name you used for authentication
+            return RedirectToAction("Index", "Home");      // Redirect to home page after logout
+        }
+
+
         [HttpPost]
         public IActionResult Login(string Email, string password)
         {
