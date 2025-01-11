@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,14 +21,17 @@ public class ToplulukController : Controller
         _context = context;
     }
 
+    [Authorize]
     public IActionResult Olustur()
     {
         return View();
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Olustur(ToplulukOlusturmaIstegi model)
     {
+        
         if (!ModelState.IsValid)
             return View(model);
 
@@ -71,7 +75,7 @@ public class ToplulukController : Controller
         await _context.SaveChangesAsync();
 
         TempData["Success"] = "Topluluk oluşturma talebiniz alınmıştır. İnceleme sonrası size bilgi verilecektir.";
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Liste", "Topluluk");
     }
 
     public IActionResult Liste()

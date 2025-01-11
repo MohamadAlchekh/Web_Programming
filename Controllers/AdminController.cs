@@ -70,7 +70,7 @@ namespace FinalProject.Controllers
             istek.Durum = ToplulukBasvuruDurumu.Onaylandi;
             await _context.SaveChangesAsync();
 
-            // Yeni topluluk oluştur
+            //Yeni topluluk oluştur
             var yeniTopluluk = new Topluluk
             {
                 Isim = istek.ToplulukAdi,
@@ -85,8 +85,9 @@ namespace FinalProject.Controllers
             _context.Topluluklar.Add(yeniTopluluk);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = $"{istek.ToplulukAdi} isimli topluluk başarıyla oluşturuldu.";
+            TempData["Success"] = $"{istek.ToplulukAdi} isimli topluluk başarıyla onaylanmıştır.";
             return RedirectToAction(nameof(Index));
+
         }
 
         public async Task<IActionResult> IstekReddet(int id)
