@@ -39,8 +39,8 @@ namespace FinalProject.Models
 
     public enum ToplulukBasvuruDurumu
     {
-        Beklemede,
-        Onaylandi,
-        Reddedildi
+        Beklemede, // 0
+        Onaylandi, // 1
+        Reddedildi // 2
     }
 } 

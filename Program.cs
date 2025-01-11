@@ -8,8 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth",options =>
 {
     options.LoginPath = "/Account/Login";
-})
-    ;
+});
+
 
 builder.Services.AddAuthorization(options =>
 {
@@ -24,6 +24,10 @@ builder.Services.AddDbContext<DBContext>(options =>
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -35,12 +39,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
-
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
