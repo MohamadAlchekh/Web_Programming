@@ -137,6 +137,42 @@ namespace FinalProject.Migrations
                     b.ToTable("Topluluklar");
                 });
 
+            modelBuilder.Entity("FinalProject.Models.ToplulukOlusturmaIstegi", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("BaskanAdSoyad")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("BasvuruTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Durum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KanitBelgesiYolu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToplulukAdi")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ToplulukOlusturmaIstekleri");
+                });
+
             modelBuilder.Entity("FinalProject.Models.User", b =>
                 {
                     b.Property<int>("ID")
@@ -149,22 +185,15 @@ namespace FinalProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KatildigiEtkinlikler")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("KullaniciAdi")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("SifreHash")
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TakipEttigiTopluluklar")
+                    b.Property<string>("SifreHash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("İsimSoyisim")

@@ -4,26 +4,34 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace FinalProject.Controllers;
 
 public class ToplulukController : Controller
 {
     private readonly IWebHostEnvironment _environment;
+    private readonly DBContext _context;
 
-    public ToplulukController(IWebHostEnvironment environment)
+    public ToplulukController(IWebHostEnvironment environment, DBContext context)
     {
         _environment = environment;
+        _context = context;
     }
 
+    [Authorize]
     public IActionResult Olustur()
     {
         return View();
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Olustur(ToplulukOlusturmaIstegi model)
     {
+        
         if (!ModelState.IsValid)
             return View(model);
 
@@ -57,14 +65,24 @@ public class ToplulukController : Controller
             {
                 await model.KanitBelgesi.CopyToAsync(stream);
             }
+
+            // Dosya yolunu modele kaydet
+            model.KanitBelgesiYolu = $"/uploads/{fileName}";
         }
 
+        // Veritabanına kaydet
+        _context.ToplulukOlusturmaIstekleri.Add(model);
+        await _context.SaveChangesAsync();
+
         TempData["Success"] = "Topluluk oluşturma talebiniz alınmıştır. İnceleme sonrası size bilgi verilecektir.";
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Liste", "Topluluk");
     }
 
     public IActionResult Liste()
     {
-        return View();
+        var topluluklar = _context.Topluluklar
+            .OrderByDescending(t => t.UyeSayisi)
+            .ToList();
+        return View(topluluklar);
     }
 } 

@@ -20,11 +20,15 @@ namespace FinalProject.Models
         public string BaskanAdSoyad { get; set; } = "";
 
         [Display(Name = "Başkanlık Belgesi")]
-        public IFormFile KanitBelgesi { get; set; }
+        [NotMapped]
+        public IFormFile? KanitBelgesi { get; set; }
+
+        [Display(Name = "Belge Yolu")]
+        public string? KanitBelgesiYolu { get; set; }
 
         [Display(Name = "Ek Açıklama")]
         [StringLength(1000)]
-        public string Aciklama { get; set; }
+        public string? Aciklama { get; set; }
 
         [Required]
         public DateTime BasvuruTarihi { get; set; } = DateTime.Now;
@@ -35,8 +39,8 @@ namespace FinalProject.Models
 
     public enum ToplulukBasvuruDurumu
     {
-        Beklemede,
-        Onaylandi,
-        Reddedildi
+        Beklemede, // 0
+        Onaylandi, // 1
+        Reddedildi // 2
     }
 } 

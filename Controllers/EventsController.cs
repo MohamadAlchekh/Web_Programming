@@ -3,11 +3,11 @@ using FinalProject.Models;
 
 namespace FinalProject.Controllers
 {
-    public class EtkinlikController : Controller
+    public class EventsController : Controller
     {
         private readonly DBContext _context;
 
-        public EtkinlikController(DBContext context)
+        public EventsController(DBContext context)
         {
             _context = context;
         }

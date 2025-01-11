@@ -1,0 +1,54 @@
+@model IEnumerable<FinalProject.Models.Etkinlik>
+
+@{
+    ViewData["Title"] = "Tüm Etkinlikler";
+}
+
+<div class="container mt-4">
+    <h2>Tüm Etkinlikler</h2>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Etkinlik Adı</th>
+                    <th>Tarih</th>
+                    <th>Konum</th>
+                    <th>Katılım</th>
+                    <th>Tür</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var etkinlik in Model)
+                {
+                    <tr>
+                        <td>@etkinlik.Baslik</td>
+                        <td>@etkinlik.Tarih.ToShortDateString()</td>
+                        <td>@etkinlik.Lokasyon</td>
+                        <td>@etkinlik.KatilimSayisi kişi</td>
+                        <td>
+                            @if (etkinlik.Online)
+                            {
+                                <span class="badge bg-info">Online</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Yüz yüze</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="EtkinlikDetay" asp-route-id="@etkinlik.ID" class="btn btn-info btn-sm">Detay</a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center">Henüz etkinlik bulunmamaktadır.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

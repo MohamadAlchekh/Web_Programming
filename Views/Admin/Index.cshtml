@@ -1,0 +1,86 @@
+@model FinalProject.Models.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<div class="container mt-4">
+    <h2>Admin Paneli</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Topluluk</h5>
+                    <p class="card-text display-4">@Model.TopluluklarSayisi</p>
+                    <a asp-action="TumTopluluklar" class="btn btn-outline-light">Tüm Toplulukları Gör</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Etkinlik</h5>
+                    <p class="card-text display-4">@Model.EtkinliklerSayisi</p>
+                    <a asp-action="TumEtkinlikler" class="btn btn-outline-light">Tüm Etkinlikleri Gör</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Bekleyen İstekler</h5>
+                    <p class="card-text display-4">@Model.BekleyenIstekler.Count</p>
+                    <a asp-action="TumIstekler" class="btn btn-outline-light">Tüm İstekleri Gör</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Bekleyen Topluluk İstekleri</h3>
+            <a asp-action="TumIstekler" class="btn btn-primary">Tüm İstekleri Gör</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Topluluk Adı</th>
+                        <th>Başkan</th>
+                        <th>Başvuru Tarihi</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var istek in Model.BekleyenIstekler)
+                    {
+                        <tr>
+                            <td>@istek.ToplulukAdi</td>
+                            <td>@istek.BaskanAdSoyad</td>
+                            <td>@istek.BasvuruTarihi.ToShortDateString()</td>
+                            <td>
+                                <a asp-action="IstekDetay" asp-route-id="@istek.ID" class="btn btn-info btn-sm">Detay</a>
+                                <a asp-action="IstekOnayla" asp-route-id="@istek.ID" class="btn btn-success btn-sm">Onayla</a>
+                                <a asp-action="IstekReddet" asp-route-id="@istek.ID" class="btn btn-danger btn-sm">Reddet</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.BekleyenIstekler.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">Bekleyen topluluk isteği bulunmamaktadır.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
