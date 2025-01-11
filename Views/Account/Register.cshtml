@@ -1,6 +1,43 @@
 @{
     ViewData["Title"] = "Kayıt Ol";
 }
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea2b 50%,#9e7cd621 100%) !important;
+    }
+    .auth-container {
+        min-height: calc(100vh - 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #667eea25 50%,#9e7cd628 100%) !important;
+    }
+    .btn-primary {
+        padding: 0.8rem 1.5rem;
+    }
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+    }
+    .modal-header {
+        background-color: #f8f9fa;
+        border-radius: 15px 15px 0 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .modal-body {
+        padding: 2rem;
+    }
+    .modal-body h5 {
+        color: #2d3748;
+        margin-bottom: 1rem;
+    }
+    .modal-body p {
+        color: #4a5568;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
 <div class="auth-container">
     <div class="auth-box">
         <h2>Hesap Oluştur</h2>
@@ -28,7 +65,7 @@
             <div class="form-check mb-3">
                 <input type="checkbox" class="form-check-input" id="terms" required>
                 <label class="form-check-label" for="terms">
-                    <a href="/terms">Kullanım Koşulları</a>'nı kabul ediyorum
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Kullanım Koşulları</a>'nı kabul ediyorum
                 </label>
             </div>
             
@@ -39,15 +76,69 @@
             </div>
         </form>
     </div>
-<script> // Şifre Eeşleşmesi Doğru Olup Olmadığını Kontrolu
+</div>
+
+<!-- Kullanım Koşulları Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Kullanım Koşulları ve Kişisel Verilerin İşlenmesi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <h5>1. Kişisel Verilerin İşlenmesi</h5>
+                <p>Kampüs Yanımda platformunu kullanarak, aşağıdaki kişisel verilerinizin işlenmesini kabul etmiş olursunuz:</p>
+                <ul>
+                    <li>Ad ve soyadınız</li>
+                    <li>E-posta adresiniz</li>
+                    <li>Profil bilgileriniz</li>
+                    <li>Etkinlik katılım geçmişiniz</li>
+                    <li>Topluluk üyelikleriniz</li>
+                </ul>
+
+                <h5>2. Veri İşleme Amacı</h5>
+                <p>Kişisel verileriniz aşağıdaki amaçlarla işlenmektedir:</p>
+                <ul>
+                    <li>Hesabınızın oluşturulması ve yönetimi</li>
+                    <li>Topluluk ve etkinlik katılımlarınızın takibi</li>
+                    <li>Platform içi iletişimin sağlanması</li>
+                    <li>Güvenliğin sağlanması ve kötüye kullanımın önlenmesi</li>
+                </ul>
+
+                <h5>3. Veri Güvenliği</h5>
+                <p>Kişisel verileriniz güvenli bir şekilde saklanmakta ve yalnızca gerekli durumlarda, yetkili kişilerle paylaşılmaktadır. Verilerinizin güvenliği için aşağıdaki önlemler alınmaktadır:</p>
+                <ul>
+                    <li>Şifreleme teknolojilerinin kullanımı</li>
+                    <li>Düzenli güvenlik güncellemeleri</li>
+                    <li>Erişim kontrolü ve yetkilendirme</li>
+                    <li>Veri yedekleme ve kurtarma prosedürleri</li>
+                </ul>
+
+                <h5>4. Veri Sahibi Hakları</h5>
+                <p>6698 sayılı KVKK kapsamında aşağıdaki haklara sahipsiniz:</p>
+                <ul>
+                    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                    <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li>
+                    <li>Kişisel verilerinizin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                    <li>Kişisel verilerinizin düzeltilmesini veya silinmesini talep etme</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
     document.querySelector("form").addEventListener("submit", function (e) {
         const password = document.getElementById("SifreHash").value;
         const confirmPassword = document.getElementById("password-confirm").value;
 
         if (password !== confirmPassword) {
-            e.preventDefault(); 
+            e.preventDefault();
             alert("Şifreler Eşleşmiyor!");
         }
     });
 </script>
-</div> 

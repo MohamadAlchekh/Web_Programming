@@ -1,10 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Controllers
 {
     public class EventsController : Controller
     {
+        private readonly DBContext _context;
+
+        public EventsController(DBContext context)
+        {
+            _context = context;
+        }
+
         private readonly DBContext _context;
 
         public EventsController(DBContext context)

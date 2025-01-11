@@ -1,0 +1,117 @@
+@model FinalProject.Models.Etkinlik
+
+@{
+    ViewData["Title"] = "Yeni Etkinlik Oluştur";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea30 50%, #9f7cd630 100%) !important;
+    }
+    .card {
+        border: none;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.9);
+    }
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+    }
+    .btn {
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+    }
+    .info-alert {
+        background-color: rgba(102, 126, 234, 0.1);
+        border-left: 4px solid #667eea;
+        padding: 1rem;
+        margin: 1rem 0 2rem 0;
+        border-radius: 0 8px 8px 0;
+    }
+    .info-alert i {
+        font-size: 1rem;
+        vertical-align: -1px;
+        color: #667eea;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4">Yeni Etkinlik Oluştur</h2>
+
+                    <div class="info-alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Etkinlik oluşturma talebiniz yöneticiler tarafından incelenecektir. Bu süreç 2-3 iş günü sürebilir.
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Baslik" class="form-label">Etkinlik Başlığı</label>
+                            <input asp-for="Baslik" class="form-control" placeholder="Etkinlik başlığını girin">
+                            <span asp-validation-for="Baslik" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Aciklama" class="form-label">Açıklama</label>
+                            <textarea asp-for="Aciklama" class="form-control" rows="4" placeholder="Etkinlik açıklamasını girin"></textarea>
+                            <span asp-validation-for="Aciklama" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Tarih" class="form-label">Tarih ve Saat</label>
+                                <input asp-for="Tarih" type="datetime-local" class="form-control">
+                                <span asp-validation-for="Tarih" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Lokasyon" class="form-label">Konum</label>
+                                <input asp-for="Lokasyon" class="form-control" placeholder="Etkinlik konumunu girin">
+                                <span asp-validation-for="Lokasyon" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ResimUrl" class="form-label">Etkinlik Görseli URL</label>
+                            <input asp-for="ResimUrl" class="form-control" placeholder="Etkinlik görselinin URL'sini girin">
+                            <span asp-validation-for="ResimUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Topluluk" class="form-label">Topluluk</label>
+                                <select asp-for="Topluluk" class="form-select" asp-items="ViewBag.Topluluklar">
+                                    <option value="">Topluluk seçin</option>
+                                </select>
+                                <span asp-validation-for="Topluluk" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="KatilimSayisi" class="form-label">Maksimum Katılımcı Sayısı</label>
+                                <input asp-for="KatilimSayisi" type="number" class="form-control" min="1" value="50">
+                                <span asp-validation-for="KatilimSayisi" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input asp-for="Online" class="form-check-input" type="checkbox">
+                                <label asp-for="Online" class="form-check-label">Online Etkinlik</label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Etkinlik Oluştur</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 
