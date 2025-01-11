@@ -14,12 +14,7 @@ namespace FinalProject.Controllers
             _context = context;
         }
 
-        private readonly DBContext _context;
-
-        public EventsController(DBContext context)
-        {
-            _context = context;
-        }
+        
 
         public IActionResult Index()
         {

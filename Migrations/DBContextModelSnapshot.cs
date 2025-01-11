@@ -17,12 +17,9 @@ namespace FinalProject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-<<<<<<< HEAD
-                .HasAnnotation("ProductVersion", "9.0.0")
-=======
-                .HasAnnotation("ProductVersion", "8.0.0")
->>>>>>> frontend
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+                .HasAnnotation("ProductVersion", "9.0.0");
+
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
