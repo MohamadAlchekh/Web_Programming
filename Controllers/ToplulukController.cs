@@ -85,4 +85,14 @@ public class ToplulukController : Controller
             .ToList();
         return View(topluluklar);
     }
+
+    public IActionResult Detay(int id)
+    {
+        var topluluk = _context.Topluluklar.FirstOrDefault(t => t.ID == id);
+        if (topluluk == null)
+        {
+            return NotFound();
+        }
+        return View(topluluk);
+    }
 } 

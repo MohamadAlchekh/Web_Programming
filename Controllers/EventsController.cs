@@ -14,8 +14,6 @@ namespace FinalProject.Controllers
             _context = context;
         }
 
-        
-
         public IActionResult Index()
         {
             if (_context.Etkinlikler == null)
@@ -42,6 +40,17 @@ namespace FinalProject.Controllers
 
         public IActionResult Create()
         {
+            var topluluklar = _context.Topluluklar
+                .Where(t => t.Onayli)
+                .OrderBy(t => t.Isim)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.ID.ToString(),
+                    Text = t.Isim
+                })
+                .ToList();
+
+            ViewBag.Topluluklar = topluluklar;
             return View();
         }
 
@@ -58,7 +67,35 @@ namespace FinalProject.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
+
+            var topluluklar = _context.Topluluklar
+                .Where(t => t.Onayli)
+                .OrderBy(t => t.Isim)
+                .Select(t => new SelectListItem
+                {
+                    Value = t.ID.ToString(),
+                    Text = t.Isim
+                })
+                .ToList();
+
+            ViewBag.Topluluklar = topluluklar;
             return View(etkinlik);
+        }
+
+        public IActionResult BiletAl(int id)
+        {
+            var etkinlik = _context.Etkinlikler.FirstOrDefault(e => e.ID == id);
+
+            if (etkinlik == null)
+            {
+                return NotFound();
+            }
+
+            // Burada bilet alma işlemleri yapılacak
+            // Örneğin: Kullanıcı bilgileri alınacak, ödeme işlemi yapılacak vs.
+
+            TempData["Message"] = "Bilet alma işleminiz başarıyla tamamlandı!";
+            return RedirectToAction(nameof(Details), new { id = etkinlik.ID });
         }
     }
 } 

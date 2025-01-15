@@ -3,110 +3,82 @@
 @{
     ViewData["Title"] = "Topluluklar";
 }
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Üniversite Toplulukları</h2>
-        <div class="search-box">
-            <input type="text" class="form-control" placeholder="Topluluk ara..." id="searchInput">
+<div class="topluluk-page">
+    <div class="topluluk-hero-section">
+        <div class="topluluk-hero-content">
+            <div class="topluluk-hero-text">
+                <h1>Topluluklar</h1>
+                <p>Kampüs Yanımda'daki tüm toplulukları keşfedin</p>
+            </div>
         </div>
     </div>
 
-    <div class="row" id="topluluklarContainer">
-        @if (Model != null && Model.Any())
+    <div class="topluluk-container mt-5">
+        <div class="d-flex justify-content-end mb-4">
+            <a href="@Url.Action("Olustur", "Topluluk")" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Yeni Topluluk
+            </a>
+        </div>
+
+        @if (!Model.Any())
         {
-            foreach (var topluluk in Model)
-            {
-                <div class="col-md-4 col-lg-3 mb-4 topluluk-card">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <h5 class="card-title">
-                                    @topluluk.Isim
-                                    @if (topluluk.Onayli)
-                                    {
-                                        <i class="bi bi-patch-check-fill text-primary ms-1" title="Onaylı Topluluk"></i>
-                                    }
-                                </h5>
-                            </div>
-                            <h6 class="card-subtitle mb-2 text-muted">@topluluk.Universite</h6>
-                            <p class="card-text">@topluluk.Aciklama</p>
-                            <div class="community-meta">
-                                <span><i class="bi bi-people"></i> @topluluk.UyeSayisi üye</span>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <button class="btn btn-outline-primary btn-sm w-100">Topluluğa Katıl</button>
-                        </div>
-                    </div>
+            <div class="text-center my-5">
+                <div class="no-topluluk">
+                    <i class="bi bi-people"></i>
+                    <h4>Henüz hiç topluluk yok</h4>
+                    <p>İlk topluluğu oluşturmak için "Yeni Topluluk" butonuna tıklayın.</p>
                 </div>
-            }
+            </div>
         }
         else
         {
-            <div class="col-12 text-center py-5">
-                <i class="bi bi-people-fill display-1 text-muted mb-3"></i>
-                <h4>Henüz hiç topluluk yok</h4>
-                <p class="text-muted">İlk topluluğu oluşturmak için "Topluluk Oluştur" butonuna tıklayın.</p>
-                <a asp-controller="Topluluk" asp-action="Olustur" class="btn btn-primary mt-3">
-                    Topluluk Oluştur
-                </a>
+            <div class="row g-4">
+                @foreach (var topluluk in Model)
+                {
+                    <div class="col-md-4">
+                        <a href="@Url.Action("Detay", "Topluluk", new { id = topluluk.ID })" class="text-decoration-none">
+                            <div class="topluluk-card">
+                                <div class="topluluk-card-body">
+                                    <h3 class="topluluk-card-title">@topluluk.Isim</h3>
+                                    <p class="topluluk-card-text">@topluluk.Aciklama</p>
+                                    <div class="topluluk-card-meta">
+                                        <span><i class="bi bi-people"></i> @topluluk.UyeSayisi üye</span>
+                                        @if (topluluk.Onayli)
+                                        {
+                                            <span class="topluluk-verified"><i class="bi bi-patch-check-fill"></i> Onaylı</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
             </div>
         }
     </div>
-</div>
 
-<style>
-.card {
-    transition: transform 0.2s;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.community-meta {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.community-meta i {
-    margin-right: 5px;
-}
-
-.search-box {
-    width: 300px;
-}
-
-.bi-patch-check-fill {
-    font-size: 0.9rem;
-}
-</style>
-
-@section Scripts {
-    <script>
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            const searchText = this.value.toLowerCase();
-            const cards = document.getElementsByClassName('topluluk-card');
-            
-            Array.from(cards).forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const description = card.querySelector('.card-text').textContent.toLowerCase();
-                
-                if (title.includes(searchText) || description.includes(searchText)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
-} 
+    <div class="topluluk-page-footer">
+        <div class="topluluk-page-footer-content">
+            <div class="footer-section">
+                <h3>Kampüs Yanımda</h3>
+                <p>Uludağ Üniversitesi öğrencilerinin sosyal ve akademik gelişimini destekleyen platform.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="/NedenTopluluk">Neden Kampüs Yanımda?</a></li>
+                    <li><a href="/Topluluk">Topluluklar</a></li>
+                    <li><a href="/Events">Etkinlikler</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Özellikler</h4>
+                <ul>
+                    <li><a href="/Topluluk/Olustur">Topluluk Oluştur</a></li>
+                    <li><a href="/Events/Create">Etkinlik Oluştur</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 

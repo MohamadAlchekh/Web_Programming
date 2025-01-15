@@ -1,45 +1,77 @@
 @model User
 
-<div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-avatar">
-            <div class="avatar-circle">
-                @Model.İsimSoyisim.Substring(0, 2).ToUpper()
+<div class="profile-page">
+    <div class="profile-content">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">
+                        @Model.İsimSoyisim.Substring(0, 2).ToUpper()
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1>@Model.İsimSoyisim</h1>
+                    <div class="join-date">
+                        <span>@Model.KayitTarihi.ToString("MMM yyyy") tarihinde katıldı</span>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-secondary">Profili Düzenle</button>
+                </div>
             </div>
-        </div>
-        <div class="profile-info">
-            <h1>@Model.İsimSoyisim</h1>
-            <div class="join-date">
-                <span>@Model.KayitTarihi.ToString("MMM yyyy") tarihinde katıldı</span>
+
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-label">AKTİVİTELER</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">TAKİP EDİLEN</span>
+                </div>
             </div>
-        </div>
-        <div class="profile-actions">
-            <button class="btn btn-secondary">Profili Düzenle</button>
+
+            <div class="tabs-section">
+                <div class="tab">
+                    <button class="tablinks active">Aktiviteler</button>
+                    <button class="tablinks">Konuşmalar</button>
+                    <button class="tablinks">Topluluklar</button>
+                    <button class="tablinks">Biletler</button>
+                </div>
+            </div>
+
+          
         </div>
     </div>
-
-    <div class="stats-container">
-        <div class="stat-box">
-            <span class="stat-label">AKTİVİTELER</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-label">TAKİP EDİLEN</span>
-        </div>
-    </div>
-
-    <div class="tabs-section">
-        <div class="tab">
-            <button class="tablinks active">Aktiviteler</button>
-            <button class="tablinks">Konuşmalar</button>
-            <button class="tablinks">Topluluklar</button>
-            <button class="tablinks">Biletler</button>
-        </div>
-    </div>
-
-  
 </div>
 
 <style>
+    .profile-page {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        background-image: url('../images/deneme4.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .profile-content {
+        position: relative;
+        z-index: 1;
+        padding: 2rem;
+    }
+
+    .profile-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+    }
+
     .profile-container {
         max-width: 800px;
         margin: 0 auto;

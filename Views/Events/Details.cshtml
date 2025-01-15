@@ -1,0 +1,52 @@
+@model FinalProject.Models.Etkinlik
+
+@{
+    ViewData["Title"] = Model.Baslik;
+}
+
+<div class="etkinlik-detay-page">
+    <div class="etkinlik-detay-hero" style="background-image: url('@Model.ResimUrl')">
+        <div class="etkinlik-detay-hero-overlay"></div>
+        <div class="etkinlik-detay-hero-content">
+            <h1>@Model.Baslik</h1>
+            <div class="etkinlik-meta">
+                <span><i class="bi bi-calendar"></i> @Model.Tarih.ToString("dd MMMM yyyy")</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="etkinlik-detay-content">
+                    <h2>Etkinlik Hakkında</h2>
+                    <p>@Model.Aciklama</p>
+                    
+                    <div class="etkinlik-detay-info mt-4">
+                        <h3>Etkinlik Bilgileri</h3>
+                        <ul>
+                            <li><i class="bi bi-calendar-event"></i> <strong>Tarih:</strong> @Model.Tarih.ToString("dd MMMM yyyy, HH:mm")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="etkinlik-bilet-card">
+                    <div class="bilet-card-header">
+                        <h3>Etkinliğe Katıl</h3>
+                    </div>
+                    <div class="bilet-card-body">
+                        <div class="bilet-info">
+                            <p><i class="bi bi-calendar-check"></i> @Model.Tarih.ToString("dd MMMM yyyy")</p>
+                            <p><i class="bi bi-clock"></i> @Model.Tarih.ToString("HH:mm")</p>
+                        </div>
+                        <a href="@Url.Action("BiletAl", "Events", new { id = Model.ID })" class="btn btn-primary btn-block mt-3">
+                            <i class="bi bi-ticket-perforated"></i> Katıl
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

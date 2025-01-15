@@ -134,5 +134,55 @@ namespace FinalProject.Controllers
             }
             return View(etkinlik);
         }
+
+        public async Task<IActionResult> TumSilmeIslemleri(string type)
+        {
+            var viewModel = new AdminSilmeViewModel();
+            
+            // Filtreleme tipine göre verileri yükle
+            if (string.IsNullOrEmpty(type) || type == "topluluk")
+            {
+                viewModel.Topluluklar = await _context.Topluluklar
+                    .OrderBy(t => t.Isim)
+                    .ToListAsync();
+            }
+            
+            if (string.IsNullOrEmpty(type) || type == "etkinlik")
+            {
+                viewModel.Etkinlikler = await _context.Etkinlikler
+                    .OrderBy(e => e.Baslik)
+                    .ToListAsync();
+            }
+            
+            ViewBag.SelectedType = type;
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Sil(int id, string type)
+        {
+            if (type == "topluluk")
+            {
+                var topluluk = await _context.Topluluklar.FindAsync(id);
+                if (topluluk != null)
+                {
+                    _context.Topluluklar.Remove(topluluk);
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Topluluk başarıyla silindi.";
+                }
+            }
+            else if (type == "etkinlik")
+            {
+                var etkinlik = await _context.Etkinlikler.FindAsync(id);
+                if (etkinlik != null)
+                {
+                    _context.Etkinlikler.Remove(etkinlik);
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Etkinlik başarıyla silindi.";
+                }
+            }
+            
+            return RedirectToAction("TumSilmeIslemleri", new { type = type });
+        }
     }
 }

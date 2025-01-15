@@ -1,0 +1,52 @@
+@model FinalProject.Models.Topluluk
+
+@{
+    ViewData["Title"] = Model.Isim;
+}
+
+<div class="topluluk-detay-page">
+    <div class="topluluk-detay-hero" style="background-image: url('@Model.ResimUrl')">
+        <div class="topluluk-detay-hero-overlay">
+            <div class="topluluk-detay-hero-content">
+                <h1>@Model.Isim</h1>
+                @if (Model.Onayli)
+                {
+                    <div class="topluluk-detay-verified">
+                        <i class="bi bi-patch-check-fill"></i> Onaylı Topluluk
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="topluluk-detay-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="topluluk-detay-card">
+                        <h2>Topluluk Hakkında</h2>
+                        <p>@Model.Aciklama</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="topluluk-detay-card">
+                        <h3>Topluluk Bilgileri</h3>
+                        <div class="topluluk-detay-info">
+                            <div class="info-item">
+                                <i class="bi bi-people-fill"></i>
+                                <span>@Model.UyeSayisi üye</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="bi bi-building"></i>
+                                <span>@Model.Universite</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-4">
+                            <i class="bi bi-person-plus-fill"></i> Topluluğa Katıl
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

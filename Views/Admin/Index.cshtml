@@ -4,7 +4,7 @@
     ViewData["Title"] = "Admin Paneli";
 }
 
-<div class="container mt-4">
+<div class="container mt-4" style="max-width: 1200px; margin: 0 auto;">
     <h2>Admin Paneli</h2>
 
     @if (TempData["Success"] != null)
@@ -15,7 +15,7 @@
     }
 
     <div class="row mt-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card bg-primary text-white">
                 <div class="card-body">
                     <h5 class="card-title">Toplam Topluluk</h5>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card bg-success text-white">
                 <div class="card-body">
                     <h5 class="card-title">Toplam Etkinlik</h5>
@@ -33,12 +33,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card bg-warning text-white">
                 <div class="card-body">
                     <h5 class="card-title">Bekleyen İstekler</h5>
                     <p class="card-text display-4">@Model.BekleyenIstekler.Count</p>
                     <a asp-action="TumIstekler" class="btn btn-outline-light">Tüm İstekleri Gör</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Topluluk/Etkinlik Sil</h5>
+                    <p class="card-text"><i class="bi bi-trash3 display-4"></i></p>
+                    <a asp-action="TumSilmeIslemleri" class="btn btn-outline-light">Silme İşlemleri</a>
                 </div>
             </div>
         </div>
