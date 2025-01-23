@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using System.IO;
 
 namespace FinalProject.Controllers
@@ -49,6 +50,14 @@ namespace FinalProject.Controllers
             return View(etkinlikler);
         }
 
+        public async Task<IActionResult> TumUyeler()
+        {
+            var uyeler = await _context.Users
+                .OrderBy(u => u.İsimSoyisim)
+                .ToListAsync();
+            return View(uyeler);
+        }
+
         public async Task<IActionResult> IstekDetay(int id)
         {
             var istek = await _context.ToplulukOlusturmaIstekleri.FindAsync(id);
@@ -76,18 +85,28 @@ namespace FinalProject.Controllers
                 Isim = istek.ToplulukAdi,
                 Aciklama = istek.Aciklama ?? "",
                 UyeSayisi = 1,
-                Olusturan = 1, // TODO: Gerçek user ID'si ile değiştirilmeli
-                Universite = "Üniversite Adı", // TODO: Üniversite bilgisi eklenebilir
-                ResimUrl = "/images/default-community.jpg", // Varsayılan resim
+                Olusturan = istek.OlusturanId,
+                Universite = istek.Universite ?? "Belirtilmemiş",
+                ResimUrl = "/images/default-community.jpg",
+                LogoUrl = istek.LogoYolu ?? "/images/default-logo.png",
                 Onayli = true
             };
 
             _context.Topluluklar.Add(yeniTopluluk);
             await _context.SaveChangesAsync();
 
+            // Topluluk oluşturan kişiyi ilk üye olarak ekle
+            var katilim = new Katilim
+            {
+                Kullanici = istek.OlusturanId,
+                Topluluk = yeniTopluluk.ID,
+                KatilmaTarihi = DateTime.Now
+            };
+            _context.Katilimlar.Add(katilim);
+            await _context.SaveChangesAsync();
+
             TempData["Success"] = $"{istek.ToplulukAdi} isimli topluluk başarıyla onaylanmıştır.";
             return RedirectToAction(nameof(Index));
-
         }
 
         public async Task<IActionResult> IstekReddet(int id)
@@ -111,6 +130,16 @@ namespace FinalProject.Controllers
                 }
             }
 
+            // Eğer logo varsa sil
+            if (!string.IsNullOrEmpty(istek.LogoYolu))
+            {
+                var logoPath = Path.Combine(_environment.WebRootPath, istek.LogoYolu.TrimStart('/'));
+                if (System.IO.File.Exists(logoPath))
+                {
+                    System.IO.File.Delete(logoPath);
+                }
+            }
+
             TempData["Success"] = $"{istek.ToplulukAdi} isimli topluluk talebi reddedildi.";
             return RedirectToAction(nameof(Index));
         }
@@ -126,7 +155,7 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> EtkinlikDetay(int id)
         {
             var etkinlik = await _context.Etkinlikler
-                .Include(e => e.Topluluk)
+                .Include(e => e.ToplulukEntity)
                 .FirstOrDefaultAsync(e => e.ID == id);
             if (etkinlik == null)
             {

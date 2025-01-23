@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+
 namespace FinalProject.Models
 {
     public class Etkinlik
@@ -18,14 +20,18 @@ namespace FinalProject.Models
         [StringLength(300, MinimumLength = 2)]
         public string Lokasyon { get; set; } = "";
         [Required]
-        [ForeignKey("Topluluk")]
+        [ForeignKey("ToplulukEntity")]
         public int Topluluk { get; set; }  // FK to Topluluk
+        public virtual Topluluk ToplulukEntity { get; set; }
         [Required]
         public int KatilimSayisi { get; set; }
+        [Required]
+        public int MaksimumKatilimci { get; set; }
         [Required]
         public bool Online { get; set; }
         [Required]
         [Url]
         public string ResimUrl { get; set; } = "";
+        public virtual ICollection<EtkinlikKatilim> Katilimlar { get; set; } = new List<EtkinlikKatilim>();
     }
 } 

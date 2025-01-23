@@ -28,12 +28,27 @@ namespace FinalProject.Models
         [Display(Name = "Belge Yolu")]
         public string? KanitBelgesiYolu { get; set; }
 
+        [Required(ErrorMessage = "Topluluk logosu zorunludur")]
+        [Display(Name = "Topluluk Logosu")]
+        [NotMapped]
+        public IFormFile? Logo { get; set; }
+
+        [Display(Name = "Logo Yolu")]
+        public string? LogoYolu { get; set; }
+
         [Display(Name = "Ek Açıklama")]
         [StringLength(1000)]
         public string? Aciklama { get; set; }
 
         [Required]
         public DateTime BasvuruTarihi { get; set; } = DateTime.Now;
+
+        [Required]
+        public int OlusturanId { get; set; }  // FK to User
+
+        [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Universite { get; set; } = "";
 
         [Required]
         public ToplulukBasvuruDurumu Durum { get; set; } = ToplulukBasvuruDurumu.Beklemede;

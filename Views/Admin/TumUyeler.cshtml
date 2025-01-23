@@ -1,0 +1,35 @@
+@model IEnumerable<FinalProject.Models.User>
+
+@{
+    ViewData["Title"] = "Tüm Üyeler";
+}
+
+<div class="container mt-4">
+    <h2>Tüm Üyeler</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>İsim Soyisim</th>
+                    <th>Email</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.ID</td>
+                        <td>@user.İsimSoyisim</td>
+                        <td>@user.Email</td>
+                        <td>@user.KayitTarihi.ToShortDateString()</td>
+                        <td>@user.Role</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div> 

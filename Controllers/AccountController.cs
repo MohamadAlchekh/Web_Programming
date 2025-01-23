@@ -31,7 +31,7 @@ namespace FinalProject.Controllers
 
 
         [HttpPost]
-        public IActionResult Login(string Email, string password)
+        public async Task<IActionResult> Login(string Email, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == Email);
 
@@ -46,11 +46,12 @@ namespace FinalProject.Controllers
                     {
                         new Claim(ClaimTypes.Name, user.Email),
                         new Claim(ClaimTypes.Role, user.Role),
+                        new Claim(ClaimTypes.NameIdentifier, user.ID.ToString())
                     };
                     var identity = new ClaimsIdentity(claims, "CookieAuth");
                     var principal = new ClaimsPrincipal(identity);
 
-                    HttpContext.SignInAsync("CookieAuth", principal);
+                    await HttpContext.SignInAsync("CookieAuth", principal);
                     return RedirectToAction("Index", "Home");
                 }
             }

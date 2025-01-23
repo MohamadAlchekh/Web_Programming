@@ -4,6 +4,7 @@ using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20250118221337_AddMaksimumKatilimci")]
+    partial class AddMaksimumKatilimci
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,6 +85,9 @@ namespace FinalProject.Migrations
                     b.Property<int>("EtkinlikID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EtkinlikID1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("KatilmaTarihi")
                         .HasColumnType("datetime2");
 
@@ -91,6 +97,8 @@ namespace FinalProject.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("EtkinlikID");
+
+                    b.HasIndex("EtkinlikID1");
 
                     b.HasIndex("KullaniciID");
 
@@ -141,10 +149,6 @@ namespace FinalProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("LogoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Olusturan")
                         .HasColumnType("int");
 
@@ -194,9 +198,6 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KanitBelgesiYolu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LogoYolu")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OlusturanId")
@@ -264,10 +265,14 @@ namespace FinalProject.Migrations
             modelBuilder.Entity("FinalProject.Models.EtkinlikKatilim", b =>
                 {
                     b.HasOne("FinalProject.Models.Etkinlik", "Etkinlik")
-                        .WithMany("Katilimlar")
+                        .WithMany()
                         .HasForeignKey("EtkinlikID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("FinalProject.Models.Etkinlik", null)
+                        .WithMany("Katilimlar")
+                        .HasForeignKey("EtkinlikID1");
 
                     b.HasOne("FinalProject.Models.User", "User")
                         .WithMany()
@@ -289,9 +294,9 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("FinalProject.Models.Topluluk", null)
-                        .WithMany("Katilimlar")
+                        .WithMany()
                         .HasForeignKey("Topluluk")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -312,8 +317,6 @@ namespace FinalProject.Migrations
             modelBuilder.Entity("FinalProject.Models.Topluluk", b =>
                 {
                     b.Navigation("Etkinlikler");
-
-                    b.Navigation("Katilimlar");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,345 @@
+@{
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<style>
+    .about-page {
+        min-height: 100vh;
+        background: white;
+        margin-bottom: 4rem;
+    }
+
+    .about-hero {
+        background: linear-gradient(135deg, #1E1B4B 0%, #7E22CE 100%);
+        padding: 6rem 8rem;
+        color: white;
+        margin-top: -2rem;
+        margin-bottom: 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-hero-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .about-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .about-hero p {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .about-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .about-section {
+        margin-bottom: 3rem;
+    }
+
+    .about-section h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1E1B4B;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-section p {
+        color: #4B5563;
+        line-height: 1.7;
+    }
+
+    .feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #F9FAFB;
+        border-radius: 0.5rem;
+        transition: transform 0.2s;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-2px);
+        background: #F3F4F6;
+    }
+
+    .feature-item i {
+        font-size: 1.25rem;
+        color: #7E22CE;
+    }
+
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 1rem;
+        padding: 2rem;
+    }
+
+    .stats-number {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+        max-width: 1000px;
+    }
+
+    .team-member {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .team-member:hover {
+        transform: translateY(-5px);
+    }
+
+    .member-photo {
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        margin: 1.5rem auto;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-photo img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .team-member:hover .member-photo img {
+        transform: scale(1.05);
+    }
+
+    .member-info {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .member-info h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1E1B4B;
+        margin-bottom: 0.5rem;
+    }
+
+    .member-role {
+        color: #7E22CE;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .member-desc {
+        color: #4B5563;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .member-social {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .member-social a {
+        color: #4B5563;
+        font-size: 1.25rem;
+        transition: color 0.2s;
+    }
+
+    .member-social a:hover {
+        color: #7E22CE;
+    }
+</style>
+
+<style media="screen and (max-width: 768px)">
+    .about-hero {
+        padding: 4rem 2rem;
+    }
+
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .member-photo {
+        width: 250px;
+        height: 250px;
+    }
+
+    .member-photo img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .member-info {
+        padding: 1rem;
+    }
+
+    .member-info h3 {
+        font-size: 1.25rem;
+    }
+</style>
+
+<div class="about-page">
+    <div class="about-hero">
+        <div class="about-hero-content">
+            <h1>Hakkımızda</h1>
+            <p>Kampüs Yanımda ile üniversite hayatınızı daha renkli ve interaktif hale getirin</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="about-section">
+                    <h2>Platformumuz Hakkında</h2>
+                    <p class="lead">
+                        Üniversite Etkinlik Platformu, öğrenci topluluklarını ve etkinliklerini bir araya getiren merkezi bir platformdur.
+                    </p>
+                    <p>
+                        Misyonumuz, üniversite öğrencilerinin sosyal ve akademik gelişimlerine katkıda bulunmak, topluluklar arası iletişimi güçlendirmek ve kampüs yaşamını daha dinamik hale getirmektir.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Platformumuzun Özellikleri</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="bi bi-people-fill"></i>
+                            <span>Öğrenci toplulukları için kolay yönetim araçları</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-calendar-event"></i>
+                            <span>Etkinlik oluşturma ve katılım takibi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-megaphone"></i>
+                            <span>Duyuru ve bilgilendirme sistemi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-laptop"></i>
+                            <span>Kullanıcı dostu arayüz</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h2>Ekibimiz</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-photo" style="height: 300px; width: 300px; margin: 0 auto;">
+                                <img src="/images/samet.jpg" alt="Samet Çevik" 
+                                     onerror="this.src='/images/team/default-avatar.png'" 
+                                     style="width: 300px; height: 300px; object-fit: cover;" />
+                            </div>
+                            <div class="member-info">
+                                <h3>Samet Çevik</h3>
+                                <p class="member-role">Kurucu & Geliştirici</p>
+                                <p class="member-desc">Uludağ Üniversitesi Yönetim Bilişim Sistemleri öğrencisi.</p>
+                                <div class="member-social">
+                                    <a href="https://github.com/zsamet" target="_blank"><i class="bi bi-github"></i></a>
+                                    <a href="https://linkedin.com/in/sametcevik1" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-photo" style="height: 300px; width: 300px; margin: 0 auto;">
+                                <img src="/images/mohamad.jpg" alt="Mohamad Alcekh" 
+                                     onerror="this.src='/images/team/default-avatar.png'" 
+                                     style="width: 300px; height: 300px; object-fit: cover;" />
+                            </div>
+                            <div class="member-info">
+                                <h3>Mohamad Alcekh</h3>
+                                <p class="member-role">Kurucu & Geliştirici</p>
+                                <p class="member-desc">Uludağ Üniversitesi Yönetim Bilişim sistemleri öğrencisi.</p>
+                                <div class="member-social">
+                                    <a href="https://github.com/MohamadAlchekh" target="_blank"><i class="bi bi-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/mohamad-alchekh" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-photo" style="height: 300px; width: 300px; margin: 0 auto;">
+                                <img src="/images/merve.jpg" alt="Merve Subaşı" 
+                                     onerror="this.src='/images/team/default-avatar.png'" 
+                                     style="width: 300px; height: 300px; object-fit: cover;" />
+                            </div>
+                            <div class="member-info">
+                                <h3>Merve Subaşı</h3>
+                                <p class="member-role">Kurucu & Geliştirici</p>
+                                <p class="member-desc">Uludağ Üniversitesi Yönetim Bilişim Sistemleri öğrencisi.</p>
+                                <div class="member-social">
+                                    <a href="https://github.com/githubmerve" target="_blank"><i class="bi bi-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/merve-suba%C5%9F%C4%B1" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="stats-card">
+                    <h3 class="h4 mb-4">Platform İstatistikleri</h3>
+                    <div class="mb-4">
+                        <div class="stats-number">@ViewBag.ToplulukSayisi</div>
+                        <div class="stats-label">Aktif Topluluk</div>
+                    </div>
+                    <div>
+                        <div class="stats-number">@ViewBag.EtkinlikSayisi</div>
+                        <div class="stats-label">Düzenlenen Etkinlik</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

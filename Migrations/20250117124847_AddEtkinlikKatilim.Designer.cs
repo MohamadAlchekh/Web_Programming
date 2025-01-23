@@ -4,6 +4,7 @@ using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20250117124847_AddEtkinlikKatilim")]
+    partial class AddEtkinlikKatilim
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +50,6 @@ namespace FinalProject.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
-
-                    b.Property<int>("MaksimumKatilimci")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Online")
                         .HasColumnType("bit");
@@ -141,10 +141,6 @@ namespace FinalProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("LogoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Olusturan")
                         .HasColumnType("int");
 
@@ -196,18 +192,7 @@ namespace FinalProject.Migrations
                     b.Property<string>("KanitBelgesiYolu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LogoYolu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OlusturanId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ToplulukAdi")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Universite")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -252,21 +237,19 @@ namespace FinalProject.Migrations
 
             modelBuilder.Entity("FinalProject.Models.Etkinlik", b =>
                 {
-                    b.HasOne("FinalProject.Models.Topluluk", "ToplulukEntity")
-                        .WithMany("Etkinlikler")
+                    b.HasOne("FinalProject.Models.Topluluk", null)
+                        .WithMany()
                         .HasForeignKey("Topluluk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ToplulukEntity");
                 });
 
             modelBuilder.Entity("FinalProject.Models.EtkinlikKatilim", b =>
                 {
                     b.HasOne("FinalProject.Models.Etkinlik", "Etkinlik")
-                        .WithMany("Katilimlar")
+                        .WithMany()
                         .HasForeignKey("EtkinlikID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Models.User", "User")
@@ -289,9 +272,9 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("FinalProject.Models.Topluluk", null)
-                        .WithMany("Katilimlar")
+                        .WithMany()
                         .HasForeignKey("Topluluk")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -302,18 +285,6 @@ namespace FinalProject.Migrations
                         .HasForeignKey("Olusturan")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Etkinlik", b =>
-                {
-                    b.Navigation("Katilimlar");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.Topluluk", b =>
-                {
-                    b.Navigation("Etkinlikler");
-
-                    b.Navigation("Katilimlar");
                 });
 #pragma warning restore 612, 618
         }

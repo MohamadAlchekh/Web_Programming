@@ -10,7 +10,20 @@
     <div class="card mt-4">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <h5 class="card-title">Topluluk Logosu</h5>
+                    <div class="text-center mb-3">
+                        @if (!string.IsNullOrEmpty(Model.LogoYolu))
+                        {
+                            <img src="@Model.LogoYolu" alt="Topluluk Logosu" class="img-fluid rounded" style="max-width: 200px; max-height: 200px; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">Logo yüklenmemiş</div>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <h5 class="card-title">Topluluk Bilgileri</h5>
                     <dl class="row">
                         <dt class="col-sm-4">Topluluk Adı</dt>
@@ -39,7 +52,7 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <h5 class="card-title">Ek Bilgiler</h5>
                     <dl class="row">
                         <dt class="col-sm-4">Açıklama</dt>

@@ -4,6 +4,25 @@
     ViewData["Title"] = Model.Isim;
 }
 
+<style>
+    .topluluk-logo {
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .topluluk-logo:hover {
+        transform: scale(1.05);
+    }
+
+    .topluluk-detay-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+</style>
+
 <div class="topluluk-detay-page">
     <div class="topluluk-detay-hero" style="background-image: url('@Model.ResimUrl')">
         <div class="topluluk-detay-hero-overlay">
@@ -21,32 +40,123 @@
 
     <div class="topluluk-detay-content">
         <div class="container">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Success"]
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
             <div class="row">
                 <div class="col-md-8">
                     <div class="topluluk-detay-card">
                         <h2>Topluluk Hakkında</h2>
                         <p>@Model.Aciklama</p>
                     </div>
+
+                    <div class="topluluk-detay-card mt-4">
+                        <h2>Topluluk Etkinlikleri</h2>
+                        @if (!Model.Etkinlikler.Any())
+                        {
+                            <p class="text-muted">Henüz etkinlik bulunmamaktadır.</p>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                @foreach (var etkinlik in Model.Etkinlikler)
+                                {
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card h-100">
+                                            <img src="@etkinlik.ResimUrl" class="card-img-top" alt="@etkinlik.Baslik">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@etkinlik.Baslik</h5>
+                                                <p class="card-text">@(etkinlik.Aciklama.Length > 100 ? etkinlik.Aciklama.Substring(0, 100) + "..." : etkinlik.Aciklama)</p>
+                                                <p class="card-text">
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-calendar"></i> @etkinlik.Tarih.ToString("dd MMMM yyyy HH:mm")
+                                                    </small>
+                                                </p>
+                                                <p class="card-text">
+                                                    <small class="text-muted">
+                                                        <i class="bi bi-people"></i> @etkinlik.KatilimSayisi katılımcı
+                                                    </small>
+                                                </p>
+                                                <a href="/Events/Details/@etkinlik.ID" class="btn btn-primary">Detayları Gör</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="topluluk-detay-card">
-                        <h3>Topluluk Bilgileri</h3>
-                        <div class="topluluk-detay-info">
-                            <div class="info-item">
-                                <i class="bi bi-people-fill"></i>
-                                <span>@Model.UyeSayisi üye</span>
-                            </div>
-                            <div class="info-item">
-                                <i class="bi bi-building"></i>
-                                <span>@Model.Universite</span>
-                            </div>
+                        <div class="text-center mb-4">
+                            @if (!string.IsNullOrEmpty(Model.LogoUrl))
+                            {
+                                <img src="@Model.LogoUrl" alt="@Model.Isim Logo" class="img-fluid topluluk-logo" style="max-width: 200px;">
+                            }
+                            else
+                            {
+                                <img src="/images/default-logo.png" alt="Varsayılan Logo" class="img-fluid topluluk-logo" style="max-width: 200px;">
+                            }
                         </div>
-                        <button class="btn btn-primary w-100 mt-4">
-                            <i class="bi bi-person-plus-fill"></i> Topluluğa Katıl
-                        </button>
+                        
+                        <div id="messageArea" style="display: none;" class="alert mb-3">
+                        </div>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form id="katilimForm" data-topluluk-id="@Model.ID" class="mb-3">
+                                <button type="submit" class="btn btn-primary btn-block w-100">
+                                    <i class="bi bi-person-plus-fill"></i> Topluluğa Katıl
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">
+                                Topluluğa katılmak için lütfen <a asp-controller="Account" asp-action="Login">giriş yapın</a>.
+                            </div>
+                        }
+
+                        <hr>
+                        <div class="topluluk-info">
+                            <p><i class="bi bi-people-fill"></i> <strong>Üye Sayısı:</strong> @Model.UyeSayisi</p>
+                            <p><i class="bi bi-calendar-event"></i> <strong>Etkinlik Sayısı:</strong> @Model.Etkinlikler.Count</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#katilimForm').on('submit', function (e) {
+                e.preventDefault();
+                var toplulukId = $(this).data('topluluk-id');
+                
+                $.post('/Topluluk/Katil/' + toplulukId, function (response) {
+                    var messageArea = $('#messageArea');
+                    messageArea.removeClass('alert-success alert-danger alert-warning').addClass('alert-' + response.type);
+                    messageArea.text(response.message);
+                    messageArea.show();
+                    
+                    if (response.type === 'success') {
+                        // Üye sayısını güncelle
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+} 

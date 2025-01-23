@@ -1,0 +1,218 @@
+@{
+    ViewData["Title"] = "İletişim";
+}
+
+<style>
+    .contact-page {
+        min-height: 100vh;
+        background: white;
+    }
+
+    .contact-hero {
+        background: linear-gradient(135deg, #1E1B4B 0%, #7E22CE 100%);
+        padding: 6rem 8rem;
+        color: white;
+        margin-top: -2rem;
+        margin-bottom: 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-hero-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .contact-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .contact-hero p {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .contact-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        height: 100%;
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: start;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info-item i {
+        font-size: 1.5rem;
+        color: #7E22CE;
+        margin-right: 1rem;
+        margin-top: 0.2rem;
+    }
+
+    .contact-info-item .content {
+        flex: 1;
+    }
+
+    .contact-info-item .content strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: #1E1B4B;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        border-radius: 50%;
+        color: #1E1B4B;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+        background: #7E22CE;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .contact-form {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 4rem 0;
+        margin-top: 4rem;
+    }
+
+    .contact-footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+</style>
+
+<div class="contact-page">
+    <div class="contact-hero">
+        <div class="contact-hero-content">
+            <h1>İletişim</h1>
+            <p>Sorularınız ve önerileriniz için bizimle iletişime geçin</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="contact-card">
+                    <h2 class="h3 mb-4">İletişim Bilgileri</h2>
+                    
+                    <div class="contact-info-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <div class="content">
+                            <strong>Adres</strong>
+                            Üniversite Kampüsü<br />
+                            Merkez Yerleşke
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <div class="content">
+                            <strong>E-posta</strong>
+                            iletisim@universite.edu.tr
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div class="content">
+                            <strong>Telefon</strong>
+                            +90 (XXX) XXX XX XX
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h3 class="h5 mb-3">Sosyal Medya</h3>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="contact-form">
+                    <h2 class="h3 mb-4">İletişim Formu</h2>
+                    
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Ad Soyad</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">E-posta</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="subject" class="form-label">Konu</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Mesajınız</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-send me-2"></i>Gönder
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

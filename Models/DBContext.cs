@@ -12,10 +12,11 @@ namespace FinalProject.Models
         public DbSet<Etkinlik> Etkinlikler { get; set; }
         public DbSet<Katilim> Katilimlar { get; set; }
         public DbSet<ToplulukOlusturmaIstegi> ToplulukOlusturmaIstekleri { get; set; }
+        public DbSet<EtkinlikKatilim> EtkinlikKatilimlar { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=LAPTOP-VICTUS\\SQLEXPRESS;Database=WebProject;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=WebProject;Integrated Security=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,8 +35,8 @@ namespace FinalProject.Models
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Etkinlik>()
-                .HasOne<Topluluk>()
-                .WithMany()
+                .HasOne(e => e.ToplulukEntity)
+                .WithMany(t => t.Etkinlikler)
                 .HasForeignKey(e => e.Topluluk)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -47,9 +48,22 @@ namespace FinalProject.Models
 
             modelBuilder.Entity<Katilim>()
                 .HasOne<Topluluk>()
-                .WithMany()
+                .WithMany(t => t.Katilimlar)
                 .HasForeignKey(k => k.Topluluk)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // EtkinlikKatilim ilişkileri
+            modelBuilder.Entity<EtkinlikKatilim>()
+                .HasOne(ek => ek.User)
+                .WithMany()
+                .HasForeignKey(ek => ek.KullaniciID)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<EtkinlikKatilim>()
+                .HasOne(ek => ek.Etkinlik)
+                .WithMany(e => e.Katilimlar)
+                .HasForeignKey(ek => ek.EtkinlikID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

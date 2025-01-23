@@ -21,7 +21,6 @@ public class HomeController : Controller
         var yayindakiEtkinlikler = await _context.Etkinlikler
             .Where(e => e.Tarih >= DateTime.Now)
             .OrderBy(e => e.Tarih)
-            .Take(6)
             .ToListAsync();
 
         // Topluluk bilgilerini al
@@ -39,7 +38,19 @@ public class HomeController : Controller
         return View(yayindakiEtkinlikler);
     }
 
+    public async Task<IActionResult> About()
+    {
+        ViewBag.ToplulukSayisi = await _context.Topluluklar.CountAsync();
+        ViewBag.EtkinlikSayisi = await _context.Etkinlikler.CountAsync();
+        return View();
+    }
+
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult Contact()
     {
         return View();
     }

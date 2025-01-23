@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers;
 
@@ -34,6 +35,50 @@ public class ToplulukController : Controller
         
         if (!ModelState.IsValid)
             return View(model);
+
+        // Kullanıcı ID'sini al
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        model.OlusturanId = userId;
+
+        // Logo yükleme kontrolü ve işlemi
+        if (model.Logo != null)
+        {
+            // Logo boyutu kontrolü (2MB)
+            if (model.Logo.Length > 2 * 1024 * 1024)
+            {
+                ModelState.AddModelError("Logo", "Logo boyutu 2MB'dan büyük olamaz.");
+                return View(model);
+            }
+
+            // Logo uzantısı kontrolü
+            var allowedLogoExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var logoExtension = Path.GetExtension(model.Logo.FileName).ToLowerInvariant();
+            
+            if (!allowedLogoExtensions.Contains(logoExtension))
+            {
+                ModelState.AddModelError("Logo", "Logo için sadece JPG ve PNG dosyaları yüklenebilir.");
+                return View(model);
+            }
+
+            // Logo dosyasını kaydet
+            var logoFileName = $"logo_{Guid.NewGuid()}{logoExtension}";
+            var logoFilePath = Path.Combine(_environment.WebRootPath, "uploads", "logos", logoFileName);
+
+            Directory.CreateDirectory(Path.Combine(_environment.WebRootPath, "uploads", "logos"));
+            
+            using (var stream = new FileStream(logoFilePath, FileMode.Create))
+            {
+                await model.Logo.CopyToAsync(stream);
+            }
+
+            // Logo yolunu modele kaydet
+            model.LogoYolu = $"/uploads/logos/{logoFileName}";
+        }
+        else
+        {
+            ModelState.AddModelError("Logo", "Topluluk logosu zorunludur.");
+            return View(model);
+        }
 
         // Eğer dosya yüklendiyse kontrolleri yap
         if (model.KanitBelgesi != null)
@@ -88,11 +133,57 @@ public class ToplulukController : Controller
 
     public IActionResult Detay(int id)
     {
-        var topluluk = _context.Topluluklar.FirstOrDefault(t => t.ID == id);
+        var topluluk = _context.Topluluklar
+            .Include(t => t.Etkinlikler)
+            .FirstOrDefault(t => t.ID == id);
+            
         if (topluluk == null)
         {
             return NotFound();
         }
+
+        // Etkinlikleri tarihe göre sırala
+        topluluk.Etkinlikler = topluluk.Etkinlikler
+            .OrderByDescending(e => e.Tarih)
+            .ToList();
+
         return View(topluluk);
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Katil(int id)
+    {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        
+        // Topluluğun var olup olmadığını kontrol et
+        var topluluk = await _context.Topluluklar.FindAsync(id);
+        if (topluluk == null)
+        {
+            return Json(new { type = "danger", message = "Topluluk bulunamadı!" });
+        }
+
+        // Kullanıcının zaten üye olup olmadığını kontrol et
+        var mevcutKatilim = await _context.Katilimlar
+            .FirstOrDefaultAsync(k => k.Topluluk == id && k.Kullanici == userId);
+
+        if (mevcutKatilim != null)
+        {
+            return Json(new { type = "warning", message = "Bu topluluğa zaten üyesiniz!" });
+        }
+
+        // Yeni katılım oluştur
+        var katilim = new Katilim
+        {
+            Topluluk = id,
+            Kullanici = userId,
+            KatilmaTarihi = DateTime.Now
+        };
+
+        _context.Katilimlar.Add(katilim);
+        topluluk.UyeSayisi++;
+        await _context.SaveChangesAsync();
+
+        return Json(new { type = "success", message = "Topluluğa başarıyla katıldınız!" });
     }
 } 

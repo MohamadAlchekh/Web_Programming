@@ -11,7 +11,10 @@
                 <h1>Kampüs Yanımdaya Hoşgeldiniz</h1>
                 <p>Uludağ Üniversitesi'si içindeki toplulukların ve etkinliklerin yeni platformu</p>
                 <div class="hero-buttons">
-                    <a href="/Account/Register" class="btn btn-primary">Hemen Başla</a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Account/Register" class="btn btn-primary">Hemen Başla</a>
+                    }
                     <a href="/NedenTopluluk" class="btn btn-outline">Daha Fazla Bilgi</a>
                 </div>
             </div>
@@ -84,36 +87,4 @@
             </div>
         </div>
     </section>
-
-    <footer class="home-footer">
-        <div class="home-footer-content">
-            <div class="footer-brand">
-                <h3>Kampüs Yanımda</h3>
-                <p>Uludağ Üniversitesi'si içindeki toplulukların ve etkinliklerin yeni platformu</p>
-                <div class="social-icons">
-                    <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <div class="footer-section">
-                    <h4>Platform</h4>
-                    <a href="/NedenTopluluk">Neden Kampüs Yanımda?</a>
-                    <a href="/NedenTopluluk">Hakkımızda</a>
-                    <a href="/Iletisim">İletişim</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Topluluklar</h4>
-                    <a href="/Topluluk">Tüm Topluluklar</a>
-                    <a href="/Topluluk/Olustur">Topluluk Oluştur</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Etkinlikler</h4>
-                    <a href="/Events">Tüm Etkinlikler</a>
-                    <a href="/Events/Create">Etkinlik Oluştur</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>

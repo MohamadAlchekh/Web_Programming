@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace FinalProject.Models
 {
@@ -25,6 +26,11 @@ namespace FinalProject.Models
         [Url]
         public string ResimUrl { get; set; } = "";
         [Required]
+        [Url]
+        public string LogoUrl { get; set; } = "";
+        [Required]
         public bool Onayli { get; set; }
+        public virtual ICollection<Etkinlik> Etkinlikler { get; set; } = new List<Etkinlik>();
+        public virtual ICollection<Katilim> Katilimlar { get; set; } = new List<Katilim>();
     }
 } 

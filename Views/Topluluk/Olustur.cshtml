@@ -75,6 +75,19 @@
             </div>
 
             <div class="mb-3">
+                <label asp-for="Universite" class="form-label">Üniversite</label>
+                <input asp-for="Universite" class="form-control" placeholder="Üniversite adını girin" />
+                <span asp-validation-for="Universite" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Logo" class="form-label">Topluluk Logosu</label>
+                <input asp-for="Logo" class="form-control" type="file" accept=".jpg,.jpeg,.png" />
+                <div class="form-text">Kabul edilen formatlar: JPG, PNG. Maksimum dosya boyutu: 2MB. Önerilen boyut: 400x400 piksel</div>
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
                 <label asp-for="KanitBelgesi" class="form-label">Başkanlık Belgesi</label>
                 <input asp-for="KanitBelgesi" class="form-control" type="file" accept=".pdf,.jpg,.jpeg,.png" />
                 <div class="form-text">Kabul edilen formatlar: PDF, JPG, PNG. Maksimum dosya boyutu: 5MB</div>

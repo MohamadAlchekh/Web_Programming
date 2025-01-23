@@ -51,6 +51,14 @@
                 <div class="card-body p-4">
                     <h2 class="text-center mb-4">Yeni Etkinlik Oluştur</h2>
 
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div class="alert alert-warning mb-4">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+
                     <div class="info-alert">
                         <i class="bi bi-info-circle me-2"></i>
                         Etkinlik oluşturma talebiniz yöneticiler tarafından incelenecektir. Bu süreç 2-3 iş günü sürebilir.
@@ -97,9 +105,9 @@
                                 <span asp-validation-for="Topluluk" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
-                                <label asp-for="KatilimSayisi" class="form-label">Maksimum Katılımcı Sayısı</label>
-                                <input asp-for="KatilimSayisi" type="number" class="form-control" min="1" value="50">
-                                <span asp-validation-for="KatilimSayisi" class="text-danger"></span>
+                                <label asp-for="MaksimumKatilimci" class="form-label">Maksimum Katılımcı Sayısı</label>
+                                <input asp-for="MaksimumKatilimci" type="number" class="form-control" min="1" value="50">
+                                <span asp-validation-for="MaksimumKatilimci" class="text-danger"></span>
                             </div>
                         </div>
 

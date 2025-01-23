@@ -1,0 +1,55 @@
+@model FinalProject.Models.Etkinlik
+
+@{
+    ViewData["Title"] = "Etkinlik Detayı";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>@Model.Baslik</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Model.ResimUrl" class="img-fluid rounded" alt="@Model.Baslik">
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-3">Açıklama</dt>
+                        <dd class="col-sm-9">@Model.Aciklama</dd>
+
+                        <dt class="col-sm-3">Tarih</dt>
+                        <dd class="col-sm-9">@Model.Tarih.ToString("dd MMMM yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-3">Lokasyon</dt>
+                        <dd class="col-sm-9">@Model.Lokasyon</dd>
+
+                        <dt class="col-sm-3">Katılımcı Sayısı</dt>
+                        <dd class="col-sm-9">@Model.KatilimSayisi</dd>
+
+                        <dt class="col-sm-3">Etkinlik Türü</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Online)
+                            {
+                                <span class="badge bg-info">Online</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Yüz yüze</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">Topluluk</dt>
+                        <dd class="col-sm-9">@Model.ToplulukEntity.Isim</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="TumEtkinlikler" class="btn btn-secondary">Geri Dön</a>
+            <a asp-action="Sil" asp-route-id="@Model.ID" asp-route-type="etkinlik" class="btn btn-danger float-end">Etkinliği Sil</a>
+        </div>
+    </div>
+</div> 

@@ -35,7 +35,7 @@
 		/* #logoutForm button { width: 100%; text-align: left; background: none; border: none; padding: 0.25rem 1rem; } #logoutForm button:hover { background-color: #f8f9fa; } */</style>
 </head>
 <body>
-	<nav class="nav-container"> <div class="nav-links"> <a href="/" class="nav-brand">Kampüs Yanımda</a> <div class="nav-menu"> <a asp-controller="Events" asp-action="Index" class="nav-item">Etkinlikler</a> <a asp-controller="Topluluk" asp-action="Liste" class="nav-item">Topluluklar</a> <a asp-controller="NedenTopluluk" asp-action="Index" class="nav-item">Neden Kampüs Yanımda?</a> </div> </div> <div class="auth-buttons"> @if (User.Identity.IsAuthenticated)
+	<nav class="nav-container"> <div class="nav-links"> <a href="/" class="nav-brand">Kampüs Yanımda</a> <div class="nav-menu"> <a asp-controller="Events" asp-action="Index" class="nav-item">Etkinlikler</a> <a asp-controller="Topluluk" asp-action="Liste" class="nav-item">Topluluklar</a> <a asp-controller="NedenTopluluk" asp-action="Index" class="nav-item">Neden Kampüs Yanımda?</a> <a asp-controller="Home" asp-action="About" class="nav-item">Hakkımızda</a> <a asp-controller="Home" asp-action="Contact" class="nav-item">İletişim</a> </div> </div> <div class="auth-buttons"> @if (User.Identity.IsAuthenticated)
 			{
 				<div class="dropdown"> <a class="btn btn-outline dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="bi bi-person-circle"></i> Profilim </a> <ul class="dropdown-menu"> <li><a class="dropdown-item" href="/Profile/">Profil</a></li> @if (User.IsInRole("Admin"))
 						{
@@ -48,5 +48,36 @@
 			} </div> </nav>
 	<div class="container-fluid"> <main role="main"> @RenderBody() </main> </div>
 	<script src="~/js/site.js" asp-append-version="true"></script> @await RenderSectionAsync("Scripts", required: false)
+	<footer class="home-footer">
+		<div class="home-footer-content">
+			<div class="footer-brand">
+				<h3>Kampüs Yanımda</h3>
+				<p>Uludağ Üniversitesi'si içindeki toplulukların ve etkinliklerin yeni platformu</p>
+				<div class="social-icons">
+					<a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
+					<a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+					<a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+				</div>
+			</div>
+			<div class="footer-links">
+				<div class="footer-section">
+					<h4>Platform</h4>
+					<a href="/NedenTopluluk">Neden Kampüs Yanımda?</a>
+					<a href="/Home/About">Hakkımızda</a>
+					<a href="/Home/Contact">İletişim</a>
+				</div>
+				<div class="footer-section">
+					<h4>Topluluklar</h4>
+					<a href="/Topluluk/Liste">Tüm Topluluklar</a>
+					<a href="/Topluluk/Olustur">Topluluk Oluştur</a>
+				</div>
+				<div class="footer-section">
+					<h4>Etkinlikler</h4>
+					<a href="/Events">Tüm Etkinlikler</a>
+					<a href="/Events/Create">Etkinlik Oluştur</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

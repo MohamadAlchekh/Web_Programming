@@ -4,6 +4,7 @@ using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20250118222604_UpdateEtkinlikKatilimCascadeDelete")]
+    partial class UpdateEtkinlikKatilimCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,10 +144,6 @@ namespace FinalProject.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("LogoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Olusturan")
                         .HasColumnType("int");
 
@@ -194,9 +193,6 @@ namespace FinalProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("KanitBelgesiYolu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LogoYolu")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OlusturanId")
@@ -289,9 +285,9 @@ namespace FinalProject.Migrations
                         .IsRequired();
 
                     b.HasOne("FinalProject.Models.Topluluk", null)
-                        .WithMany("Katilimlar")
+                        .WithMany()
                         .HasForeignKey("Topluluk")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -312,8 +308,6 @@ namespace FinalProject.Migrations
             modelBuilder.Entity("FinalProject.Models.Topluluk", b =>
                 {
                     b.Navigation("Etkinlikler");
-
-                    b.Navigation("Katilimlar");
                 });
 #pragma warning restore 612, 618
         }
