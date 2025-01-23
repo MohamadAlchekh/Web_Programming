@@ -79,7 +79,6 @@ namespace FinalProject.Controllers
             istek.Durum = ToplulukBasvuruDurumu.Onaylandi;
             await _context.SaveChangesAsync();
 
-            //Yeni topluluk oluştur
             var yeniTopluluk = new Topluluk
             {
                 Isim = istek.ToplulukAdi,
@@ -95,7 +94,6 @@ namespace FinalProject.Controllers
             _context.Topluluklar.Add(yeniTopluluk);
             await _context.SaveChangesAsync();
 
-            // Topluluk oluşturan kişiyi ilk üye olarak ekle
             var katilim = new Katilim
             {
                 Kullanici = istek.OlusturanId,
@@ -120,7 +118,6 @@ namespace FinalProject.Controllers
             istek.Durum = ToplulukBasvuruDurumu.Reddedildi;
             await _context.SaveChangesAsync();
 
-            // Eğer belge varsa sil
             if (!string.IsNullOrEmpty(istek.KanitBelgesiYolu))
             {
                 var filePath = Path.Combine(_environment.WebRootPath, istek.KanitBelgesiYolu.TrimStart('/'));
@@ -130,7 +127,6 @@ namespace FinalProject.Controllers
                 }
             }
 
-            // Eğer logo varsa sil
             if (!string.IsNullOrEmpty(istek.LogoYolu))
             {
                 var logoPath = Path.Combine(_environment.WebRootPath, istek.LogoYolu.TrimStart('/'));
@@ -168,7 +164,6 @@ namespace FinalProject.Controllers
         {
             var viewModel = new AdminSilmeViewModel();
             
-            // Filtreleme tipine göre verileri yükle
             if (string.IsNullOrEmpty(type) || type == "topluluk")
             {
                 viewModel.Topluluklar = await _context.Topluluklar

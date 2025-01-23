@@ -44,7 +44,7 @@ namespace FinalProject.Models
         public DateTime BasvuruTarihi { get; set; } = DateTime.Now;
 
         [Required]
-        public int OlusturanId { get; set; }  // FK to User
+        public int OlusturanId { get; set; } 
 
         [Required]
         [StringLength(100, MinimumLength = 2)]

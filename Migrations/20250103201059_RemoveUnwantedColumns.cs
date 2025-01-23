@@ -4,10 +4,8 @@
 
 namespace FinalProject.Migrations
 {
-    /// <inheritdoc />
     public partial class RemoveUnwantedColumns : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
@@ -23,7 +21,6 @@ namespace FinalProject.Migrations
                 table: "Users");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(

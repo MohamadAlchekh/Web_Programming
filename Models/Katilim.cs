@@ -8,10 +8,10 @@ namespace FinalProject.Models
         public int ID { get; set; }
         [Required]
         [ForeignKey("User")]
-        public int Kullanici { get; set; }  // FK to User
+        public int Kullanici { get; set; } 
         [Required]
         [ForeignKey("Topluluk")]
-        public int Topluluk { get; set; }   // FK to Topluluk
+        public int Topluluk { get; set; }  
         [Required]
         public DateTime KatilmaTarihi { get; set; }
     }

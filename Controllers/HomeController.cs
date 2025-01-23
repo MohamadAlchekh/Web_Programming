@@ -23,13 +23,11 @@ public class HomeController : Controller
             .OrderBy(e => e.Tarih)
             .ToListAsync();
 
-        // Topluluk bilgilerini al
         var toplulukIds = yayindakiEtkinlikler.Select(e => e.Topluluk).Distinct().ToList();
         var topluluklar = await _context.Topluluklar
             .Where(t => toplulukIds.Contains(t.ID))
             .ToDictionaryAsync(t => t.ID, t => t.Isim);
 
-        // Topluluk bilgilerini ViewData'ya ekle
         foreach (var topluluk in topluluklar)
         {
             ViewData["Topluluk_" + topluluk.Key] = topluluk.Value;

@@ -23,11 +23,9 @@ namespace FinalProject.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Katilim tablosu için composite key tanımlama
             modelBuilder.Entity<Katilim>()
                 .HasKey(k => k.ID);
 
-            // İlişkileri tanımlama
             modelBuilder.Entity<Topluluk>()
                 .HasOne<User>()
                 .WithMany()
@@ -52,7 +50,6 @@ namespace FinalProject.Models
                 .HasForeignKey(k => k.Topluluk)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // EtkinlikKatilim ilişkileri
             modelBuilder.Entity<EtkinlikKatilim>()
                 .HasOne(ek => ek.User)
                 .WithMany()

@@ -36,21 +36,17 @@ public class ToplulukController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        // Kullanıcı ID'sini al
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         model.OlusturanId = userId;
 
-        // Logo yükleme kontrolü ve işlemi
         if (model.Logo != null)
         {
-            // Logo boyutu kontrolü (2MB)
             if (model.Logo.Length > 2 * 1024 * 1024)
             {
                 ModelState.AddModelError("Logo", "Logo boyutu 2MB'dan büyük olamaz.");
                 return View(model);
             }
 
-            // Logo uzantısı kontrolü
             var allowedLogoExtensions = new[] { ".jpg", ".jpeg", ".png" };
             var logoExtension = Path.GetExtension(model.Logo.FileName).ToLowerInvariant();
             
@@ -60,7 +56,6 @@ public class ToplulukController : Controller
                 return View(model);
             }
 
-            // Logo dosyasını kaydet
             var logoFileName = $"logo_{Guid.NewGuid()}{logoExtension}";
             var logoFilePath = Path.Combine(_environment.WebRootPath, "uploads", "logos", logoFileName);
 
@@ -71,7 +66,6 @@ public class ToplulukController : Controller
                 await model.Logo.CopyToAsync(stream);
             }
 
-            // Logo yolunu modele kaydet
             model.LogoYolu = $"/uploads/logos/{logoFileName}";
         }
         else
@@ -80,17 +74,14 @@ public class ToplulukController : Controller
             return View(model);
         }
 
-        // Eğer dosya yüklendiyse kontrolleri yap
         if (model.KanitBelgesi != null)
         {
-            // Dosya boyutu kontrolü
-            if (model.KanitBelgesi.Length > 5 * 1024 * 1024) // 5MB
+            if (model.KanitBelgesi.Length > 5 * 1024 * 1024)
             {
                 ModelState.AddModelError("KanitBelgesi", "Dosya boyutu 5MB'dan büyük olamaz.");
                 return View(model);
             }
 
-            // Dosya uzantısı kontrolü
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf" };
             var fileExtension = Path.GetExtension(model.KanitBelgesi.FileName).ToLowerInvariant();
             
@@ -100,7 +91,6 @@ public class ToplulukController : Controller
                 return View(model);
             }
 
-            // Dosyayı kaydet
             var fileName = $"{Guid.NewGuid()}{fileExtension}";
             var filePath = Path.Combine(_environment.WebRootPath, "uploads", fileName);
 
@@ -111,11 +101,9 @@ public class ToplulukController : Controller
                 await model.KanitBelgesi.CopyToAsync(stream);
             }
 
-            // Dosya yolunu modele kaydet
             model.KanitBelgesiYolu = $"/uploads/{fileName}";
         }
 
-        // Veritabanına kaydet
         _context.ToplulukOlusturmaIstekleri.Add(model);
         await _context.SaveChangesAsync();
 
@@ -142,7 +130,6 @@ public class ToplulukController : Controller
             return NotFound();
         }
 
-        // Etkinlikleri tarihe göre sırala
         topluluk.Etkinlikler = topluluk.Etkinlikler
             .OrderByDescending(e => e.Tarih)
             .ToList();
@@ -156,14 +143,12 @@ public class ToplulukController : Controller
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         
-        // Topluluğun var olup olmadığını kontrol et
         var topluluk = await _context.Topluluklar.FindAsync(id);
         if (topluluk == null)
         {
             return Json(new { type = "danger", message = "Topluluk bulunamadı!" });
         }
 
-        // Kullanıcının zaten üye olup olmadığını kontrol et
         var mevcutKatilim = await _context.Katilimlar
             .FirstOrDefaultAsync(k => k.Topluluk == id && k.Kullanici == userId);
 
@@ -172,7 +157,6 @@ public class ToplulukController : Controller
             return Json(new { type = "warning", message = "Bu topluluğa zaten üyesiniz!" });
         }
 
-        // Yeni katılım oluştur
         var katilim = new Katilim
         {
             Topluluk = id,

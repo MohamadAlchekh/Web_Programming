@@ -21,7 +21,7 @@ namespace FinalProject.Models
         public string Lokasyon { get; set; } = "";
         [Required]
         [ForeignKey("ToplulukEntity")]
-        public int Topluluk { get; set; }  // FK to Topluluk
+        public int Topluluk { get; set; } 
         public virtual Topluluk ToplulukEntity { get; set; }
         [Required]
         public int KatilimSayisi { get; set; }

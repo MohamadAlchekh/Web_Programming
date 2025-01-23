@@ -21,7 +21,7 @@ namespace FinalProject.Models
         public int UyeSayisi { get; set; }
         [Required]
         [ForeignKey("User")]
-        public int Olusturan { get; set; }  // FK to User
+        public int Olusturan { get; set; }
         [Required]
         [Url]
         public string ResimUrl { get; set; } = "";

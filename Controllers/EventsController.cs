@@ -25,12 +25,10 @@ namespace FinalProject.Controllers
 
             var etkinlikler = _context.Etkinlikler.ToList();
 
-            // Kullanıcının giriş yapmış olup olmadığını kontrol et
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!string.IsNullOrEmpty(userIdClaim))
             {
                 var userId = int.Parse(userIdClaim);
-                // Kullanıcının başkanı olduğu toplulukları kontrol et
                 var isToplulukBaskani = _context.Topluluklar
                     .Any(t => t.Onayli && t.Olusturan == userId);
                 
@@ -103,7 +101,6 @@ namespace FinalProject.Controllers
                     return Problem("Entity set 'DBContext.Etkinlikler' is null.");
                 }
                 
-                // Maksimum katılımcı sayısı kontrolü
                 if (etkinlik.MaksimumKatilimci <= 0)
                 {
                     ModelState.AddModelError("MaksimumKatilimci", "Maksimum katılımcı sayısı 0'dan büyük olmalıdır.");
@@ -149,8 +146,6 @@ namespace FinalProject.Controllers
                 return NotFound();
             }
 
-            // Burada bilet alma işlemleri yapılacak
-            // Örneğin: Kullanıcı bilgileri alınacak, ödeme işlemi yapılacak vs.
 
             TempData["Message"] = "Bilet alma işleminiz başarıyla tamamlandı!";
             return RedirectToAction(nameof(Details), new { id = etkinlik.ID });
@@ -161,7 +156,6 @@ namespace FinalProject.Controllers
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             
-            // Kullanıcının daha önce etkinliğe katılıp katılmadığını kontrol et
             var mevcutKatilim = _context.EtkinlikKatilimlar
                 .FirstOrDefault(k => k.EtkinlikID == id && k.KullaniciID == userId);
 
