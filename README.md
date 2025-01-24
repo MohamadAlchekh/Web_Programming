@@ -2,6 +2,11 @@
 
 Kampüs Yanımda, üniversite öğrencilerinin sosyal ve akademik deneyimlerini geliştirmek için tasarlanmış dinamik bir platformdur. Öğrencilerin topluluklar oluşturmasına, etkinlikler düzenlemesine ve diğer öğrencilerle etkileşime geçmesine olanak tanır.
 
+## Ekibimiz
+- **Mohamad Alchekh**
+- **Samet Çevik**
+- **Merve Subaşı**
+
 ## Özellikler
 
 - **Topluluk Oluşturma**: Öğrenciler kendi topluluklarını oluşturabilir ve yönetebilir.
