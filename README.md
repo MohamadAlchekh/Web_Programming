@@ -1,7 +1,9 @@
 # Kampüs Yanımda: Uludağ Üniversitesi Web Tabanlı Topluluk ve Etkinlik Yönetim Sistemi
 
+
 ## Proje Açıklaması
 Kampüs Yanımda, Uludağ Üniversitesi öğrencileri için tasarlanmış bir web tabanlı topluluk ve etkinlik yönetim sistemidir. Kullanıcılar bu platformda topluluklar ve etkinlikler oluşturabilir, diğer topluluklara ve etkinliklere katılabilir. Adminler, topluluk ve etkinlikleri onaylayabilir, düzenleyebilir veya silebilir.
+- **Proje Videosu : https://youtu.be/EjCmgD9h6P8**
 
 ## Takım Üyeleri ve Görevleri
 - **[Mohamad Alchekh](https://github.com/mohamadAlchekh):** Backend geliştirme ve veritabanı tasarımı.
