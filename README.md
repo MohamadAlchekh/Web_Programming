@@ -1,83 +1,52 @@
-# Kampüs Yanımda
+# Kampüs Yanımda: Uludağ Üniversitesi Web Tabanlı Topluluk ve Etkinlik Yönetim Sistemi
 
-Kampüs Yanımda, üniversite öğrencilerinin sosyal ve akademik deneyimlerini geliştirmek için tasarlanmış dinamik bir platformdur. Öğrencilerin topluluklar oluşturmasına, etkinlikler düzenlemesine ve diğer öğrencilerle etkileşime geçmesine olanak tanır.
-
-## Özellikler
-
-- **Topluluk Oluşturma**: Öğrenciler kendi topluluklarını oluşturabilir ve yönetebilir.
-- **Etkinlik Yönetimi**: Etkinlik düzenleme ve katılım takibi yapabilirsiniz.
-- **Kullanıcı Doğrulama**: Güvenli giriş ve kayıt sistemi.
-- **Yönetici Paneli**: Topluluk isteklerini ve etkinlikleri yönetme.
-- **Duyarlı Tasarım**: Hem masaüstü hem de mobil cihazlar için optimize edilmiştir.
+## Proje Açıklaması
+Kommunity, Uludağ Üniversitesi öğrencileri için tasarlanmış bir web tabanlı topluluk ve etkinlik yönetim sistemidir. Kullanıcılar bu platformda topluluklar ve etkinlikler oluşturabilir, diğer topluluklara ve etkinliklere katılabilir. Adminler, topluluk ve etkinlikleri onaylayabilir, düzenleyebilir veya silebilir.
 
 ## Kullanılan Teknolojiler
+- **Programlama Dili:** C#
+- **Framework:** ASP.NET MVC
+- **Veritabanı:** MSSQL
+- **Frontend:** HTML, CSS, JavaScript
 
-- **ASP.NET Core MVC**: Web uygulamasını oluşturmak için.
-- **Entity Framework Core**: Veritabanı işlemleri için.
-- **Bootstrap**: Duyarlı tasarım ve UI bileşenleri için.
-- **jQuery**: İstemci tarafı betik ve AJAX istekleri için.
+## Proje Özellikleri
 
-## Proje Yapısı
+### Kullanıcı Özellikleri:
+1. **Topluluk ve Etkinlik Oluşturma:**
+   - Kullanıcılar yeni topluluklar ve etkinlikler oluşturabilir.
+2. **Katılım:**
+   - Kullanıcılar mevcut topluluklara ve etkinliklere katılabilir.
 
-- **Controllers**: Uygulamanın farklı bölümleri için mantığı yönetir.
-  - `ToplulukController.cs`: Toplulukla ilgili işlemleri yönetir. 
-    - startLine: 14
-    - endLine: 135
-  - `NedenToplulukController.cs`: "Neden Topluluk" sayfasını yönetir.
-    - startLine: 1
-    - endLine: 12
-  - `AdminController.cs`: Yönetici işlevselliklerini yönetir.
-    - startLine: 102
-    - endLine: 165
-  - `HomeController.cs`: Ana sayfa ve bilgilendirme sayfalarını yönetir.
-    - startLine: 1
-    - endLine: 63
+### Admin Paneli Özellikleri:
+1. **Onaylama:**
+   - Adminler toplulukları ve etkinlikleri onaylayabilir.
+2. **Düzenleme ve Silme:**
+   - Adminler topluluk ve etkinlik bilgilerini düzenleyebilir veya silebilir.
 
-- **Views**: HTML çıktısını oluşturmak için Razor görünümlerini içerir.
-  - `Views/NedenTopluluk/Index.cshtml`: Platformun faydalarını açıklar.
-    - startLine: 1
-    - endLine: 91
-  - `Views/Topluluk/Detay.cshtml`: Bir topluluk hakkında detaylı bilgi gösterir.
-    - startLine: 1
-    - endLine: 129
-  - `Views/Home/About.cshtml`: Platform hakkında bilgi verir.
-    - startLine: 1
-    - endLine: 345
-  - `Views/Account/Register.cshtml`: Kullanıcı doğrulama sayfaları.
+## Takım Üyeleri ve Görevleri
+- **[Mohamad Alchekh](https://github.com/mohamadAlchekh):** Backend geliştirme ve veritabanı tasarımı.
+- **[Samet Çevik](https://github.com/zsamet):** Backend geliştirme ve veritabanı tasarımı.
+- **[Merve Subaşı](https://github.com/githubmerve):** Frontend ve tasarım.
 
-## Kurulum Talimatları
+## Veritabanı Yapısı
+Veritabanı temel tabloları:
+1. **Kullanıcılar (Users):**
+   - Kullanıcı bilgilerini saklar.
+2. **Topluluklar (Communities):**
+   - Topluluk bilgilerini saklar.
+3. **Etkinlikler (Events):**
+   - Etkinlik bilgilerini saklar.
 
-1. **Depoyu Klonlayın**:
-   ```bash
-   git clone https://github.com/yourusername/kampus-yanimda.git
-   cd kampus-yanimda
-   ```
-
-2. **Veritabanı Kurulumu**:
-   - SQL Server'ın yüklü olduğundan emin olun.
-   - `appsettings.json` dosyasındaki bağlantı dizgisini veritabanınıza göre güncelleyin.
-
-3. **Migrasyonları Çalıştırın**:
-   ```bash
-   dotnet ef database update
-   ```
-
-4. **Uygulamayı Çalıştırın**:
-   ```bash
-   dotnet run
-   ```
-
-5. **Uygulamaya Erişin**:
-   - Tarayıcınızı açın ve `http://localhost:5000` adresine gidin.
+## Kullanıcı Arayüzü
+- **Ana Sayfa:**
+  - Kullanıcılar toplulukları ve etkinlikleri görebilir.
+- **Topluluk Sayfası:**
+  - Topluluk detaylarını görüntüleyebilir ve katılım sağlayabilir.
+- **Etkinlik Sayfası:**
+  - Etkinlik detaylarını görüntüleyebilir ve katılım sağlayabilir.
+- **Admin Paneli:**
+  - Topluluk ve etkinlik yönetimi yapılabilir.
 
 ## Katkıda Bulunma
+Bu projeye katkıda bulunmak isterseniz, lütfen takım üyeleriyle iletişime geçin. İletişim bilgileri için ekibin GitHub profillerini ziyaret edebilirsiniz.
 
-Katkılarınızı bekliyoruz! Lütfen depoyu çatallayın ve herhangi bir iyileştirme veya hata düzeltmesi için bir çekme isteği gönderin.
-
-## Lisans
-
-Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için [LICENSE](LICENSE) dosyasına bakın.
-
-## İletişim
-
-Herhangi bir soru veya geri bildirim için lütfen bize support@kampusyanimda.com adresinden ulaşın.
