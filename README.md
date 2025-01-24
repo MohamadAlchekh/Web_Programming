@@ -1,7 +1,12 @@
 # Kampüs Yanımda: Uludağ Üniversitesi Web Tabanlı Topluluk ve Etkinlik Yönetim Sistemi
 
 ## Proje Açıklaması
-Kommunity, Uludağ Üniversitesi öğrencileri için tasarlanmış bir web tabanlı topluluk ve etkinlik yönetim sistemidir. Kullanıcılar bu platformda topluluklar ve etkinlikler oluşturabilir, diğer topluluklara ve etkinliklere katılabilir. Adminler, topluluk ve etkinlikleri onaylayabilir, düzenleyebilir veya silebilir.
+Kampüs Yanımda, Uludağ Üniversitesi öğrencileri için tasarlanmış bir web tabanlı topluluk ve etkinlik yönetim sistemidir. Kullanıcılar bu platformda topluluklar ve etkinlikler oluşturabilir, diğer topluluklara ve etkinliklere katılabilir. Adminler, topluluk ve etkinlikleri onaylayabilir, düzenleyebilir veya silebilir.
+
+## Takım Üyeleri ve Görevleri
+- **[Mohamad Alchekh](https://github.com/mohamadAlchekh):** Backend geliştirme ve veritabanı tasarımı.
+- **[Samet Çevik](https://github.com/zsamet):** Backend geliştirme ve veritabanı tasarımı.
+- **[Merve Subaşı](https://github.com/githubmerve):** Frontend ve tasarım.
 
 ## Kullanılan Teknolojiler
 - **Programlama Dili:** C#
@@ -22,11 +27,6 @@ Kommunity, Uludağ Üniversitesi öğrencileri için tasarlanmış bir web taban
    - Adminler toplulukları ve etkinlikleri onaylayabilir.
 2. **Düzenleme ve Silme:**
    - Adminler topluluk ve etkinlik bilgilerini düzenleyebilir veya silebilir.
-
-## Takım Üyeleri ve Görevleri
-- **[Mohamad Alchekh](https://github.com/mohamadAlchekh):** Backend geliştirme ve veritabanı tasarımı.
-- **[Samet Çevik](https://github.com/zsamet):** Backend geliştirme ve veritabanı tasarımı.
-- **[Merve Subaşı](https://github.com/githubmerve):** Frontend ve tasarım.
 
 ## Veritabanı Yapısı
 Veritabanı temel tabloları:
